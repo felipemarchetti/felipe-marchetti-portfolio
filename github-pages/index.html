@@ -4,352 +4,418 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Felipe Marchetti | Full-Stack Web Developer</title>
-    <link rel="icon" href="./favicon.svg" />
     <meta
       name="description"
-      content="Portfolio de Felipe Cunha Marchetti, desenvolvedor full-stack web com experiencia em e-commerce, PHP, Laravel, JavaScript, SQL e analise de dados."
+      content="Portfolio de Felipe Cunha Marchetti, desenvolvedor full-stack com foco em e-commerce, sistemas web e dados."
     />
+    <link rel="icon" href="./favicon.svg" />
     <style>
       :root {
-        --bg: #080b12;
-        --fg: #f7fbff;
-        --muted: #96a4b8;
-        --panel: #111722;
-        --line: rgba(255, 255, 255, 0.11);
-        --cyan: #27e1ff;
-        --green: #45ff9a;
-        --gold: #ffcc55;
-        --pink: #ff4fd8;
+        --bg: #121212;
+        --panel: #1e1e1f;
+        --panel-soft: #252527;
+        --line: #383838;
+        --text: #f4f4f5;
+        --muted: #b4b4bb;
+        --accent: #ffdb70;
+        --accent-soft: rgba(255, 219, 112, 0.12);
       }
 
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       body {
         margin: 0;
-        background:
-          radial-gradient(circle at 12% 8%, rgba(39, 225, 255, 0.23), transparent 26%),
-          radial-gradient(circle at 78% 4%, rgba(255, 79, 216, 0.16), transparent 24%),
-          radial-gradient(circle at 80% 80%, rgba(69, 255, 154, 0.13), transparent 28%),
-          linear-gradient(135deg, #070911 0%, #0b1019 48%, #070911 100%);
-        color: var(--fg);
+        background: var(--bg);
+        color: var(--text);
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      body::before {
-        background-image:
-          linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-        background-size: 48px 48px;
-        content: "";
-        inset: 0;
-        mask-image: linear-gradient(to bottom, black, transparent 82%);
-        pointer-events: none;
-        position: fixed;
-      }
       a { color: inherit; text-decoration: none; }
-      .shell {
+
+      .page-shell {
         display: grid;
         gap: 28px;
-        grid-template-columns: 330px minmax(0, 1fr);
+        grid-template-columns: 300px minmax(0, 860px);
+        justify-content: center;
         margin: 0 auto;
-        max-width: 1380px;
-        min-height: 100vh;
-        padding: 28px;
-        position: relative;
+        max-width: 1220px;
+        padding: 44px 24px;
       }
-      .profile, .content {
-        backdrop-filter: blur(22px);
-        background: linear-gradient(180deg, rgba(21,29,43,.9), rgba(11,15,24,.88));
+
+      .sidebar,
+      .main-card {
+        background: var(--panel);
         border: 1px solid var(--line);
-        box-shadow: 0 24px 70px rgba(0,0,0,.42);
+        border-radius: 22px;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
       }
-      .profile {
+
+      .sidebar {
         align-self: start;
-        border-radius: 24px;
-        display: grid;
-        gap: 28px;
-        min-height: calc(100vh - 56px);
         padding: 28px;
         position: sticky;
-        top: 28px;
+        top: 24px;
       }
+
       .avatar {
         align-items: center;
-        aspect-ratio: 1;
-        background: linear-gradient(135deg, rgba(39,225,255,.22), rgba(69,255,154,.18)), #0d1420;
-        border: 1px solid rgba(255,255,255,.14);
-        border-radius: 22px;
-        display: grid;
-        justify-items: center;
-        overflow: hidden;
-        position: relative;
-      }
-      .avatar strong {
+        background: linear-gradient(135deg, #303033, #1b1b1d);
+        border-radius: 20px;
+        color: var(--accent);
+        display: flex;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 4.4rem;
-        text-shadow: 0 0 34px rgba(39,225,255,.42);
-        z-index: 2;
+        font-size: 3rem;
+        font-weight: 900;
+        height: 184px;
+        justify-content: center;
+        margin-bottom: 24px;
       }
-      .avatar::after {
-        border: 1px solid rgba(255,255,255,.15);
-        border-radius: 999px;
-        content: "";
-        height: 74%;
-        position: absolute;
-        transform: rotate(-18deg);
-        width: 118%;
-      }
-      .badge, .kicker, .section-title p, .period {
-        color: var(--green);
-        display: inline-flex;
+
+      .status,
+      .eyebrow,
+      .period,
+      .project-card small {
+        color: var(--accent);
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: .76rem;
+        font-size: 0.75rem;
         font-weight: 800;
-        gap: 8px;
         letter-spacing: 0;
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         text-transform: uppercase;
       }
+
       h1, h2, h3, p { margin-top: 0; }
-      h1 { font-size: 2.05rem; line-height: 1.05; margin-bottom: 12px; }
+      h1 { font-size: 1.9rem; line-height: 1.08; margin-bottom: 12px; }
+      h2 { line-height: 1.12; }
+
       .role {
-        background: rgba(39,225,255,.1);
-        border: 1px solid rgba(39,225,255,.22);
+        background: var(--panel-soft);
         border-radius: 999px;
-        color: var(--cyan);
+        color: var(--muted);
         display: inline-flex;
-        font-size: .9rem;
+        font-size: 0.9rem;
         font-weight: 700;
-        margin: 0;
+        margin-bottom: 24px;
         padding: 8px 12px;
       }
-      .contacts {
+
+      .contact-list {
         border-bottom: 1px solid var(--line);
         border-top: 1px solid var(--line);
         display: grid;
-        gap: 14px;
+        gap: 16px;
         padding: 22px 0;
       }
-      .contacts a, .contacts span { color: var(--muted); line-height: 1.4; }
-      .actions, .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-      .button {
+
+      .contact-list a,
+      .contact-list div {
+        display: grid;
+        gap: 4px;
+      }
+
+      .contact-list small {
+        color: var(--muted);
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+      }
+
+      .contact-list span {
+        font-size: 0.92rem;
+        overflow-wrap: anywhere;
+      }
+
+      .download-row {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 24px;
+      }
+
+      .download-row a,
+      .primary-action {
         align-items: center;
-        background: linear-gradient(135deg, var(--cyan), var(--green));
+        background: var(--accent);
         border-radius: 14px;
-        color: #061015;
+        color: #191919;
         display: inline-flex;
-        font-weight: 900;
+        font-size: 0.9rem;
+        font-weight: 800;
         justify-content: center;
         min-height: 46px;
-        padding: 12px 16px;
+        padding: 12px 14px;
       }
-      .button.secondary {
-        background: rgba(255,255,255,.06);
-        border: 1px solid var(--line);
-        color: var(--fg);
-      }
-      .content { border-radius: 28px; overflow: hidden; }
+
+      .main-card { overflow: hidden; }
+
       .nav {
-        background: rgba(8,11,18,.72);
+        background: #181819;
         border-bottom: 1px solid var(--line);
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        gap: 4px;
         justify-content: flex-end;
-        padding: 16px 22px;
-        position: sticky;
-        top: 0;
-        z-index: 5;
+        padding: 16px 20px;
       }
+
       .nav a {
-        border-radius: 999px;
+        border-radius: 10px;
         color: var(--muted);
-        font-size: .92rem;
+        font-size: 0.9rem;
         font-weight: 800;
-        padding: 10px 13px;
-      }
-      .hero {
-        display: grid;
-        gap: clamp(24px, 5vw, 54px);
-        grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
-        padding: clamp(38px, 7vw, 82px);
-      }
-      .hero h2 {
-        font-size: clamp(2.75rem, 6.2vw, 6.75rem);
-        line-height: .92;
-        margin-bottom: 24px;
-      }
-      .hero p, .card p, .timeline-card p, .project span, .contact-panel span {
-        color: var(--muted);
-        line-height: 1.65;
-      }
-      .code {
-        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)), #0a0f18;
-        border: 1px solid rgba(39,225,255,.22);
-        border-radius: 20px;
-        box-shadow: 0 0 80px rgba(39,225,255,.13);
-        overflow: hidden;
-      }
-      .bar { border-bottom: 1px solid var(--line); color: var(--muted); padding: 14px 16px; }
-      pre { margin: 0; overflow-x: auto; padding: 24px; }
-      code {
-        color: #d5ecff;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: clamp(.76rem, 1.1vw, .98rem);
-        line-height: 1.7;
-      }
-      .metrics { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, 1fr); }
-      .metrics div { background: rgba(255,255,255,.03); border-right: 1px solid var(--line); padding: 26px clamp(18px,3vw,36px); }
-      .metrics div:last-child { border-right: 0; }
-      .metrics strong, .metrics span { display: block; }
-      .metrics strong { font-size: clamp(1.5rem, 2.8vw, 2.6rem); }
-      .metrics span { color: var(--muted); margin-top: 8px; }
-      .section { padding: clamp(38px, 6vw, 74px); }
-      .section + .section { border-top: 1px solid var(--line); }
-      .section-title { margin-bottom: 28px; max-width: 760px; }
-      .section-title h2 { font-size: clamp(1.9rem, 3.4vw, 3.6rem); line-height: 1.02; margin: 0; }
-      .grid { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cards3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .card, .project, .timeline-card, .contact-panel {
-        background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.025)), var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        padding: 24px;
-      }
-      .icon { color: var(--gold); font-size: 1.45rem; margin-bottom: 18px; }
-      .stack { display: flex; flex-wrap: wrap; gap: 10px; }
-      .stack span, .tags span {
-        background: rgba(255,255,255,.06);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        color: #dce8f7;
-        display: inline-flex;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: .82rem;
         padding: 10px 12px;
       }
-      .timeline { display: grid; gap: 16px; }
-      .period { color: var(--gold); }
-      .company { color: var(--cyan); font-weight: 800; }
-      .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-      .project { display: flex; flex-direction: column; min-height: 300px; }
-      .project > p { color: var(--green); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .76rem; font-weight: 800; text-transform: uppercase; }
-      .project .tags { margin-top: auto; padding-top: 22px; }
-      .contact-panel { align-items: center; display: grid; gap: 18px; grid-template-columns: minmax(0,1fr) auto; }
-      .contact-panel strong, .contact-panel span { display: block; }
-      .contact-panel strong { font-size: 1.1rem; margin-bottom: 6px; }
-      @media (max-width: 1080px) {
-        .shell { grid-template-columns: 1fr; }
-        .profile { min-height: auto; position: relative; top: 0; }
-        .avatar { max-width: 260px; }
-        .hero { grid-template-columns: 1fr; }
+
+      .nav a:hover {
+        background: var(--panel-soft);
+        color: var(--accent);
       }
-      @media (max-width: 760px) {
-        .shell { padding: 14px; }
-        .profile, .content { border-radius: 20px; }
+
+      .section { padding: 34px; }
+      .section + .section { border-top: 1px solid var(--line); }
+
+      .intro h2 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        margin-bottom: 16px;
+        max-width: 720px;
+      }
+
+      .intro > p:last-of-type,
+      .highlight-card p,
+      .timeline-item p,
+      .project-card p,
+      .contact-section p {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .intro > p:last-of-type {
+        font-size: 1.02rem;
+        max-width: 680px;
+      }
+
+      .highlight-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 28px;
+      }
+
+      .highlight-card,
+      .timeline-item,
+      .project-card {
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px;
+      }
+
+      .highlight-card h3,
+      .timeline-item h3,
+      .project-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+
+      .section-title {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .section-title h2,
+      .contact-section h2 {
+        font-size: 1.75rem;
+        margin: 0;
+      }
+
+      .timeline { display: grid; gap: 14px; }
+      .timeline-item strong { display: block; margin-bottom: 8px; }
+
+      .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-list span {
+        background: var(--accent-soft);
+        border: 1px solid rgba(255, 219, 112, 0.22);
+        border-radius: 999px;
+        color: var(--accent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 9px 12px;
+      }
+
+      .project-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-section {
+        align-items: center;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .contact-section p { margin: 0; }
+
+      @media (max-width: 980px) {
+        .page-shell {
+          grid-template-columns: 1fr;
+          max-width: 720px;
+          padding: 18px;
+        }
+        .sidebar { position: static; }
+        .avatar { height: 150px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
-        .hero, .section { padding: 28px 20px; }
-        .hero h2 { font-size: clamp(2.2rem, 13vw, 4rem); }
-        .metrics, .grid, .cards3, .contact-panel { grid-template-columns: 1fr; }
-        .metrics div { border-bottom: 1px solid var(--line); border-right: 0; }
-        .metrics div:last-child { border-bottom: 0; }
-        .button { width: 100%; }
+        .highlight-grid, .project-grid, .contact-section { grid-template-columns: 1fr; }
+        .primary-action { width: 100%; }
+      }
+
+      @media (max-width: 560px) {
+        .section, .sidebar { padding: 22px; }
+        .intro h2 { font-size: 2rem; }
+        .download-row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
-    <main class="shell">
-      <aside class="profile">
-        <div class="avatar"><strong>FM</strong></div>
-        <div>
-          <p class="badge">Open to work</p>
-          <h1>Felipe Cunha Marchetti</h1>
-          <p class="role">Full-Stack PHP Developer</p>
+    <main class="page-shell">
+      <aside class="sidebar">
+        <div class="avatar" aria-hidden="true">FM</div>
+        <p class="status">Open to work</p>
+        <h1>Felipe Cunha Marchetti</h1>
+        <p class="role">Full-Stack PHP Developer</p>
+
+        <div class="contact-list">
+          <a href="mailto:felipecmarchetti@gmail.com">
+            <small>Email</small>
+            <span>felipecmarchetti@gmail.com</span>
+          </a>
+          <a href="tel:+5511968660968">
+            <small>Telefone</small>
+            <span>+55 11 96866-0968</span>
+          </a>
+          <div>
+            <small>Localizacao</small>
+            <span>Campo Limpo Paulista, SP</span>
+          </div>
         </div>
-        <div class="contacts">
-          <a href="mailto:felipecmarchetti@gmail.com">felipecmarchetti@gmail.com</a>
-          <a href="tel:+5511968660968">+55 11 96866-0968</a>
-          <span>Campo Limpo Paulista, SP</span>
-        </div>
-        <div class="actions">
-          <a class="button" href="./cv/felipe-marchetti-curriculo-fullstack-pt.pdf">CV PT</a>
-          <a class="button secondary" href="./cv/felipe-marchetti-fullstack-resume-en.pdf">Resume EN</a>
+
+        <div class="download-row">
+          <a href="./cv/felipe-marchetti-curriculo-fullstack-pt.pdf">CV PT</a>
+          <a href="./cv/felipe-marchetti-fullstack-resume-en.pdf">EN</a>
         </div>
       </aside>
-      <section class="content">
-        <nav class="nav">
+
+      <section class="main-card">
+        <nav class="nav" aria-label="Portfolio">
           <a href="#about">Sobre</a>
-          <a href="#stack">Stack</a>
-          <a href="#experience">Experiencia</a>
+          <a href="#resume">Resume</a>
           <a href="#projects">Projetos</a>
           <a href="#contact">Contato</a>
         </nav>
-        <section class="hero" id="about">
-          <div>
-            <p class="kicker">Web developer com perfil full-stack</p>
-            <h2>Construo e evoluo sistemas web com base forte em produto, e-commerce e dados.</h2>
-            <p>Tenho 5+ anos de experiencia em desenvolvimento web, especialmente em plataformas de e-commerce. Meu ponto forte e conectar feature, banco de dados, suporte e regra de negocio sem perder clareza no codigo.</p>
-            <div class="hero-actions">
-              <a class="button" href="mailto:felipecmarchetti@gmail.com">Falar comigo</a>
-              <a class="button secondary" href="#projects">Ver projetos</a>
-            </div>
-          </div>
-          <div class="code">
-            <div class="bar">felipe.profile.ts</div>
-            <pre><code>const felipe = {
-  role: "Full-Stack Developer",
-  focus: ["e-commerce", "web systems", "data"],
-  backend: ["PHP", "Laravel", "Node.js"],
-  frontend: ["React", "Vue.js", "JavaScript"],
-  databases: ["SQL Server", "MySQL", "MongoDB"],
-  mindset: "solve real business problems"
-};</code></pre>
-          </div>
-        </section>
-        <section class="metrics">
-          <div><strong>5+</strong><span>anos em desenvolvimento web</span></div>
-          <div><strong>Full-stack</strong><span>back, front, dados e suporte</span></div>
-          <div><strong>SQL</strong><span>investigacao e modelagem</span></div>
-        </section>
-        <section class="section">
-          <div class="section-title"><p>O que eu entrego</p><h2>Mais que tela bonita: sistema que continua funcionando depois do deploy.</h2></div>
-          <div class="grid">
-            <article class="card"><div class="icon">#</div><h3>E-commerce platforms</h3><p>Evolucao, manutencao e troubleshooting em produto real usado por clientes, com visao de negocio e suporte.</p></article>
-            <article class="card"><div class="icon">{ }</div><h3>Back-end confiavel</h3><p>PHP, Laravel, Node.js e integracoes com foco em regras claras, manutencao saudavel e entrega incremental.</p></article>
-            <article class="card"><div class="icon">&lt;/&gt;</div><h3>Front-end pratico</h3><p>Interfaces com JavaScript, React, Vue.js, jQuery e Ajax, equilibrando usabilidade, velocidade e contexto legado.</p></article>
-            <article class="card"><div class="icon">SQL</div><h3>SQL & data analysis</h3><p>Consultas, modelagem relacional, investigacao de inconsistencias e leitura de dados para decisao tecnica.</p></article>
+
+        <section class="section intro" id="about">
+          <p class="eyebrow">Web developer</p>
+          <h2>Full-stack focado em e-commerce, sistemas web e dados.</h2>
+          <p>
+            Desenvolvo e mantenho produtos web com PHP, Laravel, JavaScript e SQL,
+            equilibrando entrega, suporte e qualidade tecnica.
+          </p>
+
+          <div class="highlight-grid">
+            <article class="highlight-card">
+              <h3>E-commerce</h3>
+              <p>Sistemas web, regras de negocio e suporte a usuarios reais.</p>
+            </article>
+            <article class="highlight-card">
+              <h3>Full-stack</h3>
+              <p>PHP/Laravel, JavaScript, React, Vue.js e Node.js.</p>
+            </article>
+            <article class="highlight-card">
+              <h3>Dados</h3>
+              <p>SQL Server, MySQL, MariaDB, MongoDB e investigacao de dados.</p>
+            </article>
+            <article class="highlight-card">
+              <h3>Manutencao</h3>
+              <p>Bugs, evolucao, troubleshooting e melhoria continua.</p>
+            </article>
           </div>
         </section>
-        <section class="section" id="stack">
-          <div class="section-title"><p>Stack</p><h2>Tecnologias que uso para tirar ideia do papel.</h2></div>
-          <div class="stack">
-            <span>PHP</span><span>Laravel</span><span>Node.js</span><span>Java</span><span>C#</span><span>Go</span>
-            <span>JavaScript</span><span>TypeScript</span><span>React</span><span>Vue.js</span><span>Angular</span><span>jQuery</span>
-            <span>SQL Server</span><span>MySQL</span><span>MariaDB</span><span>MongoDB</span><span>Docker</span><span>Git</span>
-          </div>
-        </section>
-        <section class="section" id="experience">
-          <div class="section-title"><p>Experiencia</p><h2>Trajetoria em ambiente real, com demanda real.</h2></div>
+
+        <section class="section" id="resume">
+          <div class="section-title"><h2>Experiencia</h2></div>
           <div class="timeline">
-            <article class="timeline-card"><p class="period">Jan/2024 - atual</p><h3>Programador PHP Pleno</h3><p class="company">ISY Sistemas</p><p>Full-stack na plataforma de e-commerce Sublimity, contribuindo em back-end, front-end, dados, suporte tecnico e melhoria continua.</p><div class="tags"><span>PHP</span><span>Laravel</span><span>Vue.js</span><span>React</span><span>SQL</span></div></article>
-            <article class="timeline-card"><p class="period">Set/2021 - Dez/2023</p><h3>Programador PHP Junior</h3><p class="company">ISY Sistemas</p><p>Desenvolvimento e suporte em e-commerce com PHP, JavaScript, Ajax, jQuery, manutencao evolutiva e investigacao de dados.</p><div class="tags"><span>PHP</span><span>JavaScript</span><span>Ajax</span><span>jQuery</span></div></article>
-            <article class="timeline-card"><p class="period">Set/2020 - Jul/2021</p><h3>Instrutor de Informatica</h3><p class="company">Go Think Educacao Profissional</p><p>Aulas de informatica, hardware, redes e infraestrutura, fortalecendo comunicacao didatica e resolucao de problemas.</p></article>
-            <article class="timeline-card"><p class="period">Nov/2019 - Set/2020</p><h3>Suporte de TI</h3><p class="company">GZ Sistemas Automacao Comercial</p><p>Diagnostico de incidentes, suporte a usuarios, manutencao preventiva e apoio ao ambiente tecnico da empresa.</p></article>
+            <article class="timeline-item">
+              <p class="period">Jan/2024 - atual</p>
+              <h3>Programador PHP Pleno</h3>
+              <strong>ISY Sistemas</strong>
+              <p>Full-stack na plataforma de e-commerce Sublimity.</p>
+            </article>
+            <article class="timeline-item">
+              <p class="period">Set/2021 - Dez/2023</p>
+              <h3>Programador PHP Junior</h3>
+              <strong>ISY Sistemas</strong>
+              <p>Features, suporte, manutencao evolutiva e SQL.</p>
+            </article>
+            <article class="timeline-item">
+              <p class="period">Set/2020 - Jul/2021</p>
+              <h3>Instrutor de Informatica</h3>
+              <strong>Go Think Educacao Profissional</strong>
+              <p>Informatica, redes, hardware e comunicacao tecnica.</p>
+            </article>
+            <article class="timeline-item">
+              <p class="period">Nov/2019 - Set/2020</p>
+              <h3>Suporte de TI</h3>
+              <strong>GZ Sistemas Automacao Comercial</strong>
+              <p>Diagnostico de incidentes e suporte operacional.</p>
+            </article>
           </div>
         </section>
+
+        <section class="section">
+          <div class="section-title"><h2>Stack</h2></div>
+          <div class="skill-list">
+            <span>PHP</span><span>Laravel</span><span>JavaScript</span><span>TypeScript</span>
+            <span>React</span><span>Vue.js</span><span>Node.js</span><span>SQL Server</span>
+            <span>MySQL</span><span>MariaDB</span><span>MongoDB</span><span>Docker</span>
+            <span>Git</span><span>C#</span><span>Java</span><span>Go</span>
+          </div>
+        </section>
+
         <section class="section" id="projects">
-          <div class="section-title"><p>Projetos</p><h2>Uma vitrine pronta para receber repos, demos e cases.</h2></div>
-          <div class="grid cards3">
-            <article class="project"><p>case profissional</p><h3>Sublimity commerce core</h3><span>Contribuicoes em uma plataforma de e-commerce real: features, ajustes, suporte, queries e manutencao evolutiva. Sem expor codigo privado.</span><div class="tags"><span>PHP</span><span>Laravel</span><span>SQL</span></div></article>
-            <article class="project"><p>case em montagem</p><h3>Data investigation playbook</h3><span>Espaco para um estudo anonimo mostrando modelagem, queries e diagnostico de inconsistencias em ambiente relacional.</span><div class="tags"><span>SQL Server</span><span>MySQL</span></div></article>
-            <article class="project"><p>proximo projeto</p><h3>Full-stack lab</h3><span>Projeto autoral preparado para receber API, front-end moderno, autenticacao, testes, Docker e deploy publico.</span><div class="tags"><span>React</span><span>Node.js</span><span>Docker</span></div></article>
+          <div class="section-title"><h2>Projetos</h2></div>
+          <div class="project-grid">
+            <article class="project-card">
+              <small>Case profissional</small>
+              <h3>Sublimity Commerce</h3>
+              <p>E-commerce real, manutencao, queries e evolucao de produto.</p>
+            </article>
+            <article class="project-card">
+              <small>Case em montagem</small>
+              <h3>SQL Investigation</h3>
+              <p>Queries, modelagem e diagnostico de inconsistencias.</p>
+            </article>
+            <article class="project-card">
+              <small>Projeto autoral</small>
+              <h3>Full-stack Lab</h3>
+              <p>Espaco para demos publicas com API, front-end e deploy.</p>
+            </article>
           </div>
         </section>
-        <section class="section" id="contact">
-          <div class="section-title"><p>Contato</p><h2>Vamos conversar sobre web, produto ou dados.</h2></div>
-          <div class="contact-panel">
-            <div><strong>Disponivel para oportunidades full-stack</strong><span>Portugues nativo, ingles avancado e espanhol basico. Aberto a conversas com empresas do Brasil e de fora.</span></div>
-            <a class="button" href="mailto:felipecmarchetti@gmail.com">Enviar email</a>
+
+        <section class="section contact-section" id="contact">
+          <div>
+            <h2>Vamos conversar?</h2>
+            <p>Disponivel para oportunidades full-stack no Brasil e exterior.</p>
           </div>
+          <a class="primary-action" href="mailto:felipecmarchetti@gmail.com">Enviar email</a>
         </section>
       </section>
     </main>
