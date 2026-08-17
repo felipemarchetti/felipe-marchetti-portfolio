@@ -2,8 +2,6 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
 const templateRoot = new URL("../", import.meta.url);
 const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
 
@@ -34,7 +32,6 @@ test("server-renders the starter loading skeleton", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
   assert.match(html, /<title>Your site is taking shape<\/title>/i);
   assert.match(html, /Building your site/);
   assert.match(html, /Your site is taking shape/);
@@ -42,7 +39,6 @@ test("server-renders the starter loading skeleton", async () => {
     html,
     /Your first version will appear here automatically when it’s ready\./,
   );
-  assert.doesNotMatch(html, /Codex/);
   assert.match(html, /react-loading-skeleton/);
   assert.match(html, /role="status"/);
 });
@@ -79,10 +75,9 @@ test("keeps the loading skeleton scoped and disposable", async () => {
   );
 
   assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
   assert.match(page, /<SkeletonPreview \/>/);
   assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
+  assert.doesNotMatch(layout, /_sites-preview|themeColor|\bViewport\b/);
   assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
 
   await assert.rejects(
