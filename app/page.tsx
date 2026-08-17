@@ -58,7 +58,7 @@ const projects = [
 export default function Home() {
   return (
     <main className="page-shell">
-      <aside className="sidebar">
+      <aside className="sidebar" data-spotlight>
         <div className="avatar" aria-hidden="true">FM</div>
         <p className="status">Open to work</p>
         <h1>Felipe Cunha Marchetti</h1>
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </aside>
 
-      <section className="main-card">
+      <section className="main-card" data-spotlight>
         <nav className="nav" aria-label="Portfolio">
           <a href="#about">Sobre</a>
           <a href="#resume">Resume</a>
@@ -112,7 +112,7 @@ export default function Home() {
 
           <div className="highlight-grid">
             {highlights.map(({ icon: Icon, title, text }) => (
-              <article className="highlight-card" key={title}>
+              <article className="highlight-card" data-spotlight key={title}>
                 <Icon size={22} />
                 <div>
                   <h3>{title}</h3>
@@ -130,7 +130,7 @@ export default function Home() {
           </div>
           <div className="timeline">
             {experiences.map(([role, company, period, text]) => (
-              <article className="timeline-item" key={`${role}-${period}`}>
+              <article className="timeline-item" data-spotlight key={`${role}-${period}`}>
                 <span>{period}</span>
                 <h3>{role}</h3>
                 <strong>{company}</strong>
@@ -146,7 +146,7 @@ export default function Home() {
             <h2>Stack</h2>
           </div>
           <div className="skill-list">
-            {skills.map((skill) => <span key={skill}>{skill}</span>)}
+            {skills.map((skill) => <span data-spotlight key={skill}>{skill}</span>)}
           </div>
         </section>
 
@@ -157,7 +157,7 @@ export default function Home() {
           </div>
           <div className="project-grid">
             {projects.map(([name, kind, text]) => (
-              <article className="project-card" key={name}>
+              <article className="project-card" data-spotlight key={name}>
                 <small>{kind}</small>
                 <h3>{name}</h3>
                 <p>{text}</p>
@@ -166,7 +166,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section contact-section" id="contact">
+        <section className="section contact-section" data-spotlight id="contact">
           <h2>Vamos conversar?</h2>
           <p>Disponivel para oportunidades full-stack no Brasil e exterior.</p>
           <a className="primary-action" href="mailto:felipecmarchetti@gmail.com">
@@ -174,6 +174,27 @@ export default function Home() {
           </a>
         </section>
       </section>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (() => {
+              const surfaces = document.querySelectorAll("[data-spotlight]");
+              surfaces.forEach((surface) => {
+                let frame = 0;
+                surface.addEventListener("pointermove", (event) => {
+                  if (frame) cancelAnimationFrame(frame);
+                  frame = requestAnimationFrame(() => {
+                    const rect = surface.getBoundingClientRect();
+                    surface.style.setProperty("--pointer-x", event.clientX - rect.left + "px");
+                    surface.style.setProperty("--pointer-y", event.clientY - rect.top + "px");
+                    frame = 0;
+                  });
+                }, { passive: true });
+              });
+            })();
+          `,
+        }}
+      />
     </main>
   );
 }

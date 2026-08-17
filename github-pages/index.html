@@ -14,11 +14,13 @@
         --bg: #121212;
         --panel: #1e1e1f;
         --panel-soft: #252527;
+        --panel-hover: #2b2b2d;
         --line: #383838;
         --text: #f4f4f5;
         --muted: #b4b4bb;
         --accent: #ffdb70;
         --accent-soft: rgba(255, 219, 112, 0.12);
+        --accent-line: rgba(255, 219, 112, 0.38);
       }
 
       * { box-sizing: border-box; }
@@ -30,6 +32,12 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
       a { color: inherit; text-decoration: none; }
+
+      [data-spotlight] {
+        --pointer-x: 50%;
+        --pointer-y: 50%;
+        position: relative;
+      }
 
       .page-shell {
         display: grid;
@@ -47,6 +55,10 @@
         border: 1px solid var(--line);
         border-radius: 22px;
         box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
       }
 
       .sidebar {
@@ -68,6 +80,10 @@
         height: 184px;
         justify-content: center;
         margin-bottom: 24px;
+        transition:
+          background 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
       }
 
       .status,
@@ -108,8 +124,15 @@
 
       .contact-list a,
       .contact-list div {
+        border-radius: 14px;
         display: grid;
         gap: 4px;
+        margin: 0 -8px;
+        padding: 8px;
+        transition:
+          background 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
       }
 
       .contact-list small {
@@ -143,6 +166,10 @@
         justify-content: center;
         min-height: 46px;
         padding: 12px 14px;
+        transition:
+          background 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
       }
 
       .main-card { overflow: hidden; }
@@ -162,11 +189,16 @@
         font-size: 0.9rem;
         font-weight: 800;
         padding: 10px 12px;
+        transition:
+          background 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
       }
 
       .nav a:hover {
         background: var(--panel-soft);
         color: var(--accent);
+        transform: translateY(-1px);
       }
 
       .section { padding: 34px; }
@@ -206,6 +238,12 @@
         border: 1px solid var(--line);
         border-radius: 18px;
         padding: 20px;
+        overflow: hidden;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
       }
 
       .highlight-card h3,
@@ -214,6 +252,7 @@
         font-size: 1.08rem;
         line-height: 1.25;
         margin-bottom: 8px;
+        transition: color 180ms ease;
       }
 
       .section-title {
@@ -246,7 +285,13 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.82rem;
         font-weight: 700;
+        overflow: hidden;
         padding: 9px 12px;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
       }
 
       .project-grid {
@@ -260,9 +305,112 @@
         display: grid;
         gap: 18px;
         grid-template-columns: minmax(0, 1fr) auto;
+        overflow: hidden;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease;
       }
 
       .contact-section p { margin: 0; }
+
+      @media (hover: hover) and (pointer: fine) {
+        [data-spotlight]::before {
+          background:
+            radial-gradient(
+              260px circle at var(--pointer-x) var(--pointer-y),
+              rgba(255, 219, 112, 0.16),
+              rgba(255, 219, 112, 0.06) 38%,
+              transparent 68%
+            );
+          content: "";
+          inset: 0;
+          opacity: 0;
+          pointer-events: none;
+          position: absolute;
+          transition: opacity 180ms ease;
+          z-index: 0;
+        }
+
+        [data-spotlight]:hover::before {
+          opacity: 1;
+        }
+
+        [data-spotlight] > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .sidebar:hover {
+          border-color: var(--accent-line);
+          box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+          transform: translateY(-3px);
+        }
+
+        .sidebar:hover .avatar {
+          background: linear-gradient(135deg, #38322a, #202022);
+          color: #fff0b0;
+          transform: scale(1.015);
+        }
+
+        .contact-list a:hover,
+        .contact-list div:hover {
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--accent);
+          transform: translateX(3px);
+        }
+
+        .download-row a:hover,
+        .primary-action:hover {
+          background: #ffe68f;
+          box-shadow: 0 10px 24px rgba(255, 219, 112, 0.18);
+          transform: translateY(-2px) scale(1.02);
+        }
+
+        .highlight-card:hover,
+        .timeline-item:hover,
+        .project-card:hover {
+          background: var(--panel-hover);
+          border-color: var(--accent-line);
+          box-shadow: 0 16px 34px rgba(0, 0, 0, 0.26);
+          transform: translateY(-5px) scale(1.018);
+          z-index: 2;
+        }
+
+        .project-card:hover {
+          transform: translateY(-7px) scale(1.03);
+        }
+
+        .highlight-card:hover h3,
+        .timeline-item:hover h3,
+        .project-card:hover h3 {
+          color: var(--accent);
+        }
+
+        .skill-list span:hover {
+          background: rgba(255, 219, 112, 0.2);
+          border-color: var(--accent-line);
+          color: #fff0b0;
+          transform: translateY(-3px) scale(1.06);
+        }
+
+        .contact-section:hover {
+          background: rgba(255, 219, 112, 0.035);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
 
       @media (max-width: 980px) {
         .page-shell {
@@ -286,7 +434,7 @@
   </head>
   <body>
     <main class="page-shell">
-      <aside class="sidebar">
+      <aside class="sidebar" data-spotlight>
         <div class="avatar" aria-hidden="true">FM</div>
         <p class="status">Open to work</p>
         <h1>Felipe Cunha Marchetti</h1>
@@ -313,7 +461,7 @@
         </div>
       </aside>
 
-      <section class="main-card">
+      <section class="main-card" data-spotlight>
         <nav class="nav" aria-label="Portfolio">
           <a href="#about">Sobre</a>
           <a href="#resume">Resume</a>
@@ -330,19 +478,19 @@
           </p>
 
           <div class="highlight-grid">
-            <article class="highlight-card">
+            <article class="highlight-card" data-spotlight>
               <h3>E-commerce</h3>
               <p>Sistemas web, regras de negocio e suporte a usuarios reais.</p>
             </article>
-            <article class="highlight-card">
+            <article class="highlight-card" data-spotlight>
               <h3>Full-stack</h3>
               <p>PHP/Laravel, JavaScript, React, Vue.js e Node.js.</p>
             </article>
-            <article class="highlight-card">
+            <article class="highlight-card" data-spotlight>
               <h3>Dados</h3>
               <p>SQL Server, MySQL, MariaDB, MongoDB e investigacao de dados.</p>
             </article>
-            <article class="highlight-card">
+            <article class="highlight-card" data-spotlight>
               <h3>Manutencao</h3>
               <p>Bugs, evolucao, troubleshooting e melhoria continua.</p>
             </article>
@@ -352,25 +500,25 @@
         <section class="section" id="resume">
           <div class="section-title"><h2>Experiencia</h2></div>
           <div class="timeline">
-            <article class="timeline-item">
+            <article class="timeline-item" data-spotlight>
               <p class="period">Jan/2024 - atual</p>
               <h3>Programador PHP Pleno</h3>
               <strong>ISY Sistemas</strong>
               <p>Full-stack na plataforma de e-commerce Sublimity.</p>
             </article>
-            <article class="timeline-item">
+            <article class="timeline-item" data-spotlight>
               <p class="period">Set/2021 - Dez/2023</p>
               <h3>Programador PHP Junior</h3>
               <strong>ISY Sistemas</strong>
               <p>Features, suporte, manutencao evolutiva e SQL.</p>
             </article>
-            <article class="timeline-item">
+            <article class="timeline-item" data-spotlight>
               <p class="period">Set/2020 - Jul/2021</p>
               <h3>Instrutor de Informatica</h3>
               <strong>Go Think Educacao Profissional</strong>
               <p>Informatica, redes, hardware e comunicacao tecnica.</p>
             </article>
-            <article class="timeline-item">
+            <article class="timeline-item" data-spotlight>
               <p class="period">Nov/2019 - Set/2020</p>
               <h3>Suporte de TI</h3>
               <strong>GZ Sistemas Automacao Comercial</strong>
@@ -382,27 +530,27 @@
         <section class="section">
           <div class="section-title"><h2>Stack</h2></div>
           <div class="skill-list">
-            <span>PHP</span><span>Laravel</span><span>JavaScript</span><span>TypeScript</span>
-            <span>React</span><span>Vue.js</span><span>Node.js</span><span>SQL Server</span>
-            <span>MySQL</span><span>MariaDB</span><span>MongoDB</span><span>Docker</span>
-            <span>Git</span><span>C#</span><span>Java</span><span>Go</span>
+            <span data-spotlight>PHP</span><span data-spotlight>Laravel</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span>
+            <span data-spotlight>React</span><span data-spotlight>Vue.js</span><span data-spotlight>Node.js</span><span data-spotlight>SQL Server</span>
+            <span data-spotlight>MySQL</span><span data-spotlight>MariaDB</span><span data-spotlight>MongoDB</span><span data-spotlight>Docker</span>
+            <span data-spotlight>Git</span><span data-spotlight>C#</span><span data-spotlight>Java</span><span data-spotlight>Go</span>
           </div>
         </section>
 
         <section class="section" id="projects">
           <div class="section-title"><h2>Projetos</h2></div>
           <div class="project-grid">
-            <article class="project-card">
+            <article class="project-card" data-spotlight>
               <small>Case profissional</small>
               <h3>Sublimity Commerce</h3>
               <p>E-commerce real, manutencao, queries e evolucao de produto.</p>
             </article>
-            <article class="project-card">
+            <article class="project-card" data-spotlight>
               <small>Case em montagem</small>
               <h3>SQL Investigation</h3>
               <p>Queries, modelagem e diagnostico de inconsistencias.</p>
             </article>
-            <article class="project-card">
+            <article class="project-card" data-spotlight>
               <small>Projeto autoral</small>
               <h3>Full-stack Lab</h3>
               <p>Espaco para demos publicas com API, front-end e deploy.</p>
@@ -410,7 +558,7 @@
           </div>
         </section>
 
-        <section class="section contact-section" id="contact">
+        <section class="section contact-section" data-spotlight id="contact">
           <div>
             <h2>Vamos conversar?</h2>
             <p>Disponivel para oportunidades full-stack no Brasil e exterior.</p>
@@ -419,5 +567,22 @@
         </section>
       </section>
     </main>
+    <script>
+      (() => {
+        const surfaces = document.querySelectorAll("[data-spotlight]");
+        surfaces.forEach((surface) => {
+          let frame = 0;
+          surface.addEventListener("pointermove", (event) => {
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => {
+              const rect = surface.getBoundingClientRect();
+              surface.style.setProperty("--pointer-x", event.clientX - rect.left + "px");
+              surface.style.setProperty("--pointer-y", event.clientY - rect.top + "px");
+              frame = 0;
+            });
+          }, { passive: true });
+        });
+      })();
+    </script>
   </body>
 </html>
