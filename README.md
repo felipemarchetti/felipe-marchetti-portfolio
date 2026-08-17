@@ -1,6 +1,6 @@
 # Felipe Marchetti Portfolio
 
-Portfolio profissional de Felipe Cunha Marchetti, desenvolvedor full-stack com foco em e-commerce, PHP, Laravel, JavaScript, SQL e analise de dados.
+Portfolio profissional de Felipe Cunha Marchetti, desenvolvedor full-stack com foco em e-commerce, sistemas web e dados.
 
 Site publico:
 
@@ -11,16 +11,16 @@ https://felipemarchetti.github.io/felipe-marchetti-portfolio/
 Este portfolio apresenta:
 
 - Experiencia profissional em desenvolvimento full-stack e plataformas de e-commerce.
-- Stack tecnica com PHP, Laravel, JavaScript, React, Vue.js, Node.js e bancos de dados.
-- Cards preparados para estudos de caso e projetos publicos.
+- Stack tecnica organizada por linguagem, front-end, back-end, bancos de dados, cloud/devops e ferramentas.
+- Projetos profissionais e autorais com descricoes objetivas.
 - Curriculo em portugues e resume em ingles.
 
 ## Estrutura
 
-- `app/`: versao React/Vinext usada no desenvolvimento.
-- `github-pages/`: versao estatica publicada pelo GitHub Pages.
-- `github-pages/cv/`: arquivos PDF de curriculo.
-- `.github/workflows/github-pages.yml`: workflow de deploy automatico.
+- `github-pages/index.html`: pagina estatica principal.
+- `github-pages/assets/`: imagens e icones usados no portfolio.
+- `github-pages/cv/`: PDFs de curriculo.
+- `.github/workflows/github-pages.yml`: deploy automatico no GitHub Pages.
 
 ## Publicacao
 
