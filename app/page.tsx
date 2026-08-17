@@ -197,9 +197,13 @@ export default function Home() {
       </aside>
 
       <section className="main-card" data-spotlight>
-        <nav className="nav" aria-label="Portfolio">
+        <nav
+          className="nav"
+          style={{ left: 0, position: "fixed", right: 0, top: 0, zIndex: 50 }}
+          aria-label="Portfolio"
+        >
           <a href="#about" data-i18n="navAbout">Sobre</a>
-          <a href="#resume" data-i18n="navResume">Resumo</a>
+          <a href="#resume" data-i18n="navResume">Experiências</a>
           <a href="#projects" data-i18n="navProjects">Projetos</a>
           <a href="#contact" data-i18n="navContact">Contato</a>
         </nav>
@@ -324,7 +328,7 @@ export default function Home() {
                 pt: {
                   status: "Open to work",
                   navAbout: "Sobre",
-                  navResume: "Resumo",
+                  navResume: "Experiências",
                   navProjects: "Projetos",
                   navContact: "Contato",
                   heroTitle: "Full-stack focado em e-commerce, sistemas web e dados.",
@@ -386,7 +390,7 @@ export default function Home() {
                 en: {
                   status: "Open to work",
                   navAbout: "About",
-                  navResume: "Resume",
+                  navResume: "Experience",
                   navProjects: "Projects",
                   navContact: "Contact",
                   heroTitle: "Full-stack focused on e-commerce, web systems and data.",

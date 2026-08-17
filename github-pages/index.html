@@ -46,7 +46,7 @@
         justify-content: center;
         margin: 0 auto;
         max-width: 1220px;
-        padding: 44px 24px;
+        padding: 84px 24px 44px;
       }
 
       .sidebar,
@@ -62,7 +62,7 @@
         align-self: start;
         padding: 28px;
         position: sticky;
-        top: 24px;
+        top: 84px;
       }
 
       .avatar {
@@ -247,21 +247,29 @@
         display: inline-flex;
         font-size: 0.9rem;
         font-weight: 800;
+        gap: 8px;
         justify-content: center;
         min-height: 46px;
         padding: 12px 14px;
         transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
-      .main-card { overflow: hidden; }
+      .main-card { overflow: visible; }
 
       .nav {
         background: #181819;
         border-bottom: 1px solid var(--line);
+        border-radius: 0;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
         display: flex;
         gap: 4px;
-        justify-content: flex-end;
+        justify-content: center;
+        left: 0;
         padding: 16px 20px;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 50;
       }
 
       .nav a {
@@ -279,7 +287,7 @@
         transform: translateY(-1px);
       }
 
-      .section { padding: 34px; }
+      .section { padding: 34px; scroll-margin-top: 86px; }
       .section + .section { border-top: 1px solid var(--line); }
 
       .intro h2 {
@@ -581,7 +589,7 @@
         .page-shell {
           grid-template-columns: 1fr;
           max-width: 720px;
-          padding: 18px;
+          padding: 84px 18px 18px;
         }
         .sidebar { position: static; }
         .avatar { height: 150px; }
@@ -637,9 +645,9 @@
       </aside>
 
       <section class="main-card" data-spotlight>
-        <nav class="nav" aria-label="Portfolio">
+        <nav class="nav" style="left:0;position:fixed;right:0;top:0;z-index:50" aria-label="Portfolio">
           <a href="#about" data-i18n="navAbout">Sobre</a>
-          <a href="#resume" data-i18n="navResume">Resumo</a>
+          <a href="#resume" data-i18n="navResume">Experiências</a>
           <a href="#projects" data-i18n="navProjects">Projetos</a>
           <a href="#contact" data-i18n="navContact">Contato</a>
         </nav>
@@ -821,7 +829,7 @@
           pt: {
             status: "Open to work",
             navAbout: "Sobre",
-            navResume: "Resumo",
+            navResume: "Experiências",
             navProjects: "Projetos",
             navContact: "Contato",
             heroTitle: "Full-stack focado em e-commerce, sistemas web e dados.",
@@ -883,7 +891,7 @@
           en: {
             status: "Open to work",
             navAbout: "About",
-            navResume: "Resume",
+            navResume: "Experience",
             navProjects: "Projects",
             navContact: "Contact",
             heroTitle: "Full-stack focused on e-commerce, web systems and data.",
