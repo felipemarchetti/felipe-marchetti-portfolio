@@ -55,10 +55,7 @@
         border: 1px solid var(--line);
         border-radius: 22px;
         box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
-        transition:
-          border-color 180ms ease,
-          box-shadow 180ms ease,
-          transform 180ms ease;
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
       .sidebar {
@@ -80,10 +77,7 @@
         height: 184px;
         justify-content: center;
         margin-bottom: 24px;
-        transition:
-          background 180ms ease,
-          color 180ms ease,
-          transform 180ms ease;
+        transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
       .status,
@@ -114,6 +108,35 @@
         padding: 8px 12px;
       }
 
+      .language-toggle {
+        background: #181819;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        display: grid;
+        gap: 4px;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 24px;
+        padding: 4px;
+      }
+
+      .language-toggle button {
+        background: transparent;
+        border: 0;
+        border-radius: 10px;
+        color: var(--muted);
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.82rem;
+        font-weight: 800;
+        min-height: 36px;
+        transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+      }
+
+      .language-toggle button.active {
+        background: var(--accent);
+        color: #191919;
+      }
+
       .contact-list {
         border-bottom: 1px solid var(--line);
         border-top: 1px solid var(--line);
@@ -129,10 +152,7 @@
         gap: 4px;
         margin: 0 -8px;
         padding: 8px;
-        transition:
-          background 180ms ease,
-          color 180ms ease,
-          transform 180ms ease;
+        transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
       .contact-list small {
@@ -150,7 +170,7 @@
       .download-row {
         display: grid;
         gap: 10px;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         margin-top: 24px;
       }
 
@@ -166,10 +186,7 @@
         justify-content: center;
         min-height: 46px;
         padding: 12px 14px;
-        transition:
-          background 180ms ease,
-          box-shadow 180ms ease,
-          transform 180ms ease;
+        transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
       .main-card { overflow: hidden; }
@@ -189,10 +206,7 @@
         font-size: 0.9rem;
         font-weight: 800;
         padding: 10px 12px;
-        transition:
-          background 180ms ease,
-          color 180ms ease,
-          transform 180ms ease;
+        transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
       .nav a:hover {
@@ -233,22 +247,20 @@
 
       .highlight-card,
       .timeline-item,
-      .project-card {
+      .project-card,
+      .skill-group {
         background: var(--panel-soft);
         border: 1px solid var(--line);
         border-radius: 18px;
-        padding: 20px;
         overflow: hidden;
-        transition:
-          background 180ms ease,
-          border-color 180ms ease,
-          box-shadow 180ms ease,
-          transform 180ms ease;
+        padding: 20px;
+        transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
       .highlight-card h3,
       .timeline-item h3,
-      .project-card h3 {
+      .project-card h3,
+      .skill-group h3 {
         font-size: 1.08rem;
         line-height: 1.25;
         margin-bottom: 8px;
@@ -271,6 +283,21 @@
       .timeline { display: grid; gap: 14px; }
       .timeline-item strong { display: block; margin-bottom: 8px; }
 
+      .skill-groups {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .skill-group-title {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .skill-group-title h3 { margin: 0; }
+
       .skill-list {
         display: flex;
         flex-wrap: wrap;
@@ -287,11 +314,7 @@
         font-weight: 700;
         overflow: hidden;
         padding: 9px 12px;
-        transition:
-          background 180ms ease,
-          border-color 180ms ease,
-          color 180ms ease,
-          transform 180ms ease;
+        transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
       .project-grid {
@@ -306,9 +329,7 @@
         gap: 18px;
         grid-template-columns: minmax(0, 1fr) auto;
         overflow: hidden;
-        transition:
-          background 180ms ease,
-          border-color 180ms ease;
+        transition: background 180ms ease, border-color 180ms ease;
       }
 
       .contact-section p { margin: 0; }
@@ -331,14 +352,8 @@
           z-index: 0;
         }
 
-        [data-spotlight]:hover::before {
-          opacity: 1;
-        }
-
-        [data-spotlight] > * {
-          position: relative;
-          z-index: 1;
-        }
+        [data-spotlight]:hover::before { opacity: 1; }
+        [data-spotlight] > * { position: relative; z-index: 1; }
 
         .sidebar:hover {
           border-color: var(--accent-line);
@@ -360,6 +375,7 @@
         }
 
         .download-row a:hover,
+        .language-toggle button:hover,
         .primary-action:hover {
           background: #ffe68f;
           box-shadow: 0 10px 24px rgba(255, 219, 112, 0.18);
@@ -368,7 +384,8 @@
 
         .highlight-card:hover,
         .timeline-item:hover,
-        .project-card:hover {
+        .project-card:hover,
+        .skill-group:hover {
           background: var(--panel-hover);
           border-color: var(--accent-line);
           box-shadow: 0 16px 34px rgba(0, 0, 0, 0.26);
@@ -376,13 +393,12 @@
           z-index: 2;
         }
 
-        .project-card:hover {
-          transform: translateY(-7px) scale(1.03);
-        }
+        .project-card:hover { transform: translateY(-7px) scale(1.03); }
 
         .highlight-card:hover h3,
         .timeline-item:hover h3,
-        .project-card:hover h3 {
+        .project-card:hover h3,
+        .skill-group:hover h3 {
           color: var(--accent);
         }
 
@@ -393,19 +409,12 @@
           transform: translateY(-3px) scale(1.06);
         }
 
-        .contact-section:hover {
-          background: rgba(255, 219, 112, 0.035);
-        }
+        .contact-section:hover { background: rgba(255, 219, 112, 0.035); }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
           transition-duration: 0.01ms !important;
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
@@ -421,14 +430,13 @@
         .sidebar { position: static; }
         .avatar { height: 150px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
-        .highlight-grid, .project-grid, .contact-section { grid-template-columns: 1fr; }
+        .highlight-grid, .skill-groups, .project-grid, .contact-section { grid-template-columns: 1fr; }
         .primary-action { width: 100%; }
       }
 
       @media (max-width: 560px) {
         .section, .sidebar { padding: 22px; }
         .intro h2 { font-size: 2rem; }
-        .download-row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -436,139 +444,276 @@
     <main class="page-shell">
       <aside class="sidebar" data-spotlight>
         <div class="avatar" aria-hidden="true">FM</div>
-        <p class="status">Open to work</p>
+        <p class="status" data-i18n="status">Open to work</p>
         <h1>Felipe Cunha Marchetti</h1>
         <p class="role">Full-Stack PHP Developer</p>
 
+        <div class="language-toggle" aria-label="Language selector">
+          <button class="active" type="button" data-lang-switch="pt">🇧🇷 PT</button>
+          <button type="button" data-lang-switch="en">🇺🇸 EN</button>
+        </div>
+
         <div class="contact-list">
           <a href="mailto:felipecmarchetti@gmail.com">
-            <small>Email</small>
+            <small data-i18n="contactEmail">Email</small>
             <span>felipecmarchetti@gmail.com</span>
           </a>
           <a href="tel:+5511968660968">
-            <small>Telefone</small>
+            <small data-i18n="contactPhone">Telefone</small>
             <span>+55 11 96866-0968</span>
           </a>
           <div>
-            <small>Localizacao</small>
+            <small data-i18n="contactLocation">Localização</small>
             <span>Campo Limpo Paulista, SP</span>
           </div>
         </div>
 
         <div class="download-row">
-          <a href="./cv/felipe-marchetti-curriculo-fullstack-pt.pdf">CV PT</a>
-          <a href="./cv/felipe-marchetti-fullstack-resume-en.pdf">EN</a>
+          <a data-resume-link href="./cv/felipe-marchetti-curriculo-fullstack-pt.pdf">
+            <span data-i18n="resumeButton">Currículo</span>
+          </a>
         </div>
       </aside>
 
       <section class="main-card" data-spotlight>
         <nav class="nav" aria-label="Portfolio">
-          <a href="#about">Sobre</a>
-          <a href="#resume">Resume</a>
-          <a href="#projects">Projetos</a>
-          <a href="#contact">Contato</a>
+          <a href="#about" data-i18n="navAbout">Sobre</a>
+          <a href="#resume" data-i18n="navResume">Resumo</a>
+          <a href="#projects" data-i18n="navProjects">Projetos</a>
+          <a href="#contact" data-i18n="navContact">Contato</a>
         </nav>
 
         <section class="section intro" id="about">
           <p class="eyebrow">Web developer</p>
-          <h2>Full-stack focado em e-commerce, sistemas web e dados.</h2>
-          <p>
+          <h2 data-i18n="heroTitle">Full-stack focado em e-commerce, sistemas web e dados.</h2>
+          <p data-i18n="heroText">
             Desenvolvo e mantenho produtos web com PHP, Laravel, JavaScript e SQL,
-            equilibrando entrega, suporte e qualidade tecnica.
+            equilibrando entrega, suporte e qualidade técnica.
           </p>
 
           <div class="highlight-grid">
             <article class="highlight-card" data-spotlight>
-              <h3>E-commerce</h3>
-              <p>Sistemas web, regras de negocio e suporte a usuarios reais.</p>
+              <h3 data-i18n="highlightEcommerceTitle">E-commerce</h3>
+              <p data-i18n="highlightEcommerceText">Sistemas web, regras de negócio e suporte a usuários reais.</p>
             </article>
             <article class="highlight-card" data-spotlight>
-              <h3>Full-stack</h3>
-              <p>PHP/Laravel, JavaScript, React, Vue.js e Node.js.</p>
+              <h3 data-i18n="highlightFullstackTitle">Full-stack</h3>
+              <p data-i18n="highlightFullstackText">PHP/Laravel, JavaScript, React, Vue.js e Node.js.</p>
             </article>
             <article class="highlight-card" data-spotlight>
-              <h3>Dados</h3>
-              <p>SQL Server, MySQL, MariaDB, MongoDB e investigacao de dados.</p>
+              <h3 data-i18n="highlightDataTitle">Dados</h3>
+              <p data-i18n="highlightDataText">SQL Server, MySQL, MariaDB, MongoDB e investigação de dados.</p>
             </article>
             <article class="highlight-card" data-spotlight>
-              <h3>Manutencao</h3>
-              <p>Bugs, evolucao, troubleshooting e melhoria continua.</p>
+              <h3 data-i18n="highlightMaintenanceTitle">Manutenção</h3>
+              <p data-i18n="highlightMaintenanceText">Bugs, evolução, troubleshooting e melhoria contínua.</p>
             </article>
           </div>
         </section>
 
         <section class="section" id="resume">
-          <div class="section-title"><h2>Experiencia</h2></div>
+          <div class="section-title"><h2 data-i18n="experienceTitle">Experiência</h2></div>
           <div class="timeline">
             <article class="timeline-item" data-spotlight>
               <p class="period">Jan/2024 - atual</p>
               <h3>Programador PHP Pleno</h3>
               <strong>ISY Sistemas</strong>
-              <p>Full-stack na plataforma de e-commerce Sublimity.</p>
+              <p data-i18n="experienceSeniorText">Atuação full-stack na plataforma de e-commerce Sublimity, participando da evolução de funcionalidades, correção de bugs, análise de regras de negócio e manutenção de integrações. Trabalho com PHP, Laravel, JavaScript e SQL em rotinas que envolvem suporte a usuários reais, investigação de dados, melhorias de performance e entrega contínua de ajustes para operação comercial.</p>
             </article>
             <article class="timeline-item" data-spotlight>
               <p class="period">Set/2021 - Dez/2023</p>
               <h3>Programador PHP Junior</h3>
               <strong>ISY Sistemas</strong>
-              <p>Features, suporte, manutencao evolutiva e SQL.</p>
+              <p data-i18n="experienceJuniorText">Desenvolvimento e manutenção de módulos web, criação de consultas SQL, ajustes em telas, apoio ao suporte técnico e análise de incidentes em produção. Ganhei base forte em sustentação de sistemas, leitura de código legado, depuração de fluxos críticos e comunicação com áreas de negócio para transformar problemas operacionais em correções objetivas.</p>
             </article>
             <article class="timeline-item" data-spotlight>
               <p class="period">Set/2020 - Jul/2021</p>
-              <h3>Instrutor de Informatica</h3>
-              <strong>Go Think Educacao Profissional</strong>
-              <p>Informatica, redes, hardware e comunicacao tecnica.</p>
+              <h3>Instrutor de Informática</h3>
+              <strong>Go Think Educação Profissional</strong>
+              <p data-i18n="experienceInstructorText">Responsável por aulas de informática, redes, hardware e fundamentos de tecnologia para turmas com diferentes níveis de conhecimento. A experiência fortaleceu minha didática, organização de conteúdo, comunicação técnica e capacidade de explicar problemas complexos de forma simples.</p>
             </article>
             <article class="timeline-item" data-spotlight>
               <p class="period">Nov/2019 - Set/2020</p>
               <h3>Suporte de TI</h3>
-              <strong>GZ Sistemas Automacao Comercial</strong>
-              <p>Diagnostico de incidentes e suporte operacional.</p>
+              <strong>GZ Sistemas Automação Comercial</strong>
+              <p data-i18n="experienceSupportText">Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.</p>
             </article>
           </div>
         </section>
 
         <section class="section">
           <div class="section-title"><h2>Stack</h2></div>
-          <div class="skill-list">
-            <span data-spotlight>PHP</span><span data-spotlight>Laravel</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span>
-            <span data-spotlight>React</span><span data-spotlight>Vue.js</span><span data-spotlight>Node.js</span><span data-spotlight>SQL Server</span>
-            <span data-spotlight>MySQL</span><span data-spotlight>MariaDB</span><span data-spotlight>MongoDB</span><span data-spotlight>Docker</span>
-            <span data-spotlight>Git</span><span data-spotlight>C#</span><span data-spotlight>Java</span><span data-spotlight>Go</span>
+          <div class="skill-groups">
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillLanguages">Linguagens</h3></div>
+              <div class="skill-list"><span data-spotlight>PHP</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span><span data-spotlight>Python</span><span data-spotlight>SQL</span><span data-spotlight>C#</span><span data-spotlight>Java</span><span data-spotlight>Go</span></div>
+            </article>
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillFrontend">Front-end</h3></div>
+              <div class="skill-list"><span data-spotlight>HTML5</span><span data-spotlight>CSS3</span><span data-spotlight>React</span><span data-spotlight>Vue.js</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span></div>
+            </article>
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillBackend">Back-end</h3></div>
+              <div class="skill-list"><span data-spotlight>Laravel</span><span data-spotlight>Node.js</span><span data-spotlight>APIs REST</span><span data-spotlight>PHP</span><span data-spotlight>Docker</span></div>
+            </article>
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillDatabase">Databases & BaaS</h3></div>
+              <div class="skill-list"><span data-spotlight>PostgreSQL</span><span data-spotlight>MySQL</span><span data-spotlight>SQL Server</span><span data-spotlight>MariaDB</span><span data-spotlight>MongoDB</span><span data-spotlight>Supabase</span><span data-spotlight>Firebase</span></div>
+            </article>
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillDevops">DevOps & Tools</h3></div>
+              <div class="skill-list"><span data-spotlight>Git</span><span data-spotlight>Docker</span><span data-spotlight>Jenkins</span><span data-spotlight>CI/CD</span><span data-spotlight>Postman</span><span data-spotlight>AWS</span><span data-spotlight>S3</span></div>
+            </article>
+            <article class="skill-group" data-spotlight>
+              <div class="skill-group-title"><h3 data-i18n="skillAi">AI Tools</h3></div>
+              <div class="skill-list"><span data-spotlight>ChatGPT</span><span data-spotlight>Codex</span><span data-spotlight>AI-assisted workflow</span></div>
+            </article>
           </div>
         </section>
 
         <section class="section" id="projects">
-          <div class="section-title"><h2>Projetos</h2></div>
+          <div class="section-title"><h2 data-i18n="projectsTitle">Projetos</h2></div>
           <div class="project-grid">
             <article class="project-card" data-spotlight>
-              <small>Case profissional</small>
+              <small data-i18n="projectOneKind">Case profissional</small>
               <h3>Sublimity Commerce</h3>
-              <p>E-commerce real, manutencao, queries e evolucao de produto.</p>
+              <p data-i18n="projectOneText">E-commerce real, manutenção, queries e evolução de produto.</p>
             </article>
             <article class="project-card" data-spotlight>
-              <small>Case em montagem</small>
+              <small data-i18n="projectTwoKind">Case em montagem</small>
               <h3>SQL Investigation</h3>
-              <p>Queries, modelagem e diagnostico de inconsistencias.</p>
+              <p data-i18n="projectTwoText">Queries, modelagem e diagnóstico de inconsistências.</p>
             </article>
             <article class="project-card" data-spotlight>
-              <small>Projeto autoral</small>
+              <small data-i18n="projectThreeKind">Projeto autoral</small>
               <h3>Full-stack Lab</h3>
-              <p>Espaco para demos publicas com API, front-end e deploy.</p>
+              <p data-i18n="projectThreeText">Espaço para demos públicas com API, front-end e deploy.</p>
             </article>
           </div>
         </section>
 
         <section class="section contact-section" data-spotlight id="contact">
           <div>
-            <h2>Vamos conversar?</h2>
-            <p>Disponivel para oportunidades full-stack no Brasil e exterior.</p>
+            <h2 data-i18n="contactTitle">Vamos conversar?</h2>
+            <p data-i18n="contactText">Disponível para oportunidades full-stack no Brasil e exterior.</p>
           </div>
-          <a class="primary-action" href="mailto:felipecmarchetti@gmail.com">Enviar email</a>
+          <a class="primary-action" href="mailto:felipecmarchetti@gmail.com"><span data-i18n="emailButton">Enviar email</span></a>
         </section>
       </section>
     </main>
     <script>
       (() => {
+        const translations = {
+          pt: {
+            status: "Open to work",
+            navAbout: "Sobre",
+            navResume: "Resumo",
+            navProjects: "Projetos",
+            navContact: "Contato",
+            heroTitle: "Full-stack focado em e-commerce, sistemas web e dados.",
+            heroText: "Desenvolvo e mantenho produtos web com PHP, Laravel, JavaScript e SQL, equilibrando entrega, suporte e qualidade técnica.",
+            experienceTitle: "Experiência",
+            projectsTitle: "Projetos",
+            contactTitle: "Vamos conversar?",
+            contactText: "Disponível para oportunidades full-stack no Brasil e exterior.",
+            emailButton: "Enviar email",
+            resumeButton: "Currículo",
+            resumeHref: "./cv/felipe-marchetti-curriculo-fullstack-pt.pdf",
+            htmlLang: "pt-BR",
+            contactEmail: "Email",
+            contactPhone: "Telefone",
+            contactLocation: "Localização",
+            highlightEcommerceTitle: "E-commerce",
+            highlightEcommerceText: "Sistemas web, regras de negócio e suporte a usuários reais.",
+            highlightFullstackTitle: "Full-stack",
+            highlightFullstackText: "PHP/Laravel, JavaScript, React, Vue.js e Node.js.",
+            highlightDataTitle: "Dados",
+            highlightDataText: "SQL Server, MySQL, MariaDB, MongoDB e investigação de dados.",
+            highlightMaintenanceTitle: "Manutenção",
+            highlightMaintenanceText: "Bugs, evolução, troubleshooting e melhoria contínua.",
+            experienceSeniorText: "Atuação full-stack na plataforma de e-commerce Sublimity, participando da evolução de funcionalidades, correção de bugs, análise de regras de negócio e manutenção de integrações. Trabalho com PHP, Laravel, JavaScript e SQL em rotinas que envolvem suporte a usuários reais, investigação de dados, melhorias de performance e entrega contínua de ajustes para operação comercial.",
+            experienceJuniorText: "Desenvolvimento e manutenção de módulos web, criação de consultas SQL, ajustes em telas, apoio ao suporte técnico e análise de incidentes em produção. Ganhei base forte em sustentação de sistemas, leitura de código legado, depuração de fluxos críticos e comunicação com áreas de negócio para transformar problemas operacionais em correções objetivas.",
+            experienceInstructorText: "Responsável por aulas de informática, redes, hardware e fundamentos de tecnologia para turmas com diferentes níveis de conhecimento. A experiência fortaleceu minha didática, organização de conteúdo, comunicação técnica e capacidade de explicar problemas complexos de forma simples.",
+            experienceSupportText: "Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.",
+            skillLanguages: "Linguagens",
+            skillFrontend: "Front-end",
+            skillBackend: "Back-end",
+            skillDatabase: "Databases & BaaS",
+            skillDevops: "DevOps & Tools",
+            skillAi: "AI Tools",
+            projectOneKind: "Case profissional",
+            projectOneText: "E-commerce real, manutenção, queries e evolução de produto.",
+            projectTwoKind: "Case em montagem",
+            projectTwoText: "Queries, modelagem e diagnóstico de inconsistências.",
+            projectThreeKind: "Projeto autoral",
+            projectThreeText: "Espaço para demos públicas com API, front-end e deploy."
+          },
+          en: {
+            status: "Open to work",
+            navAbout: "About",
+            navResume: "Resume",
+            navProjects: "Projects",
+            navContact: "Contact",
+            heroTitle: "Full-stack focused on e-commerce, web systems and data.",
+            heroText: "I build and maintain web products with PHP, Laravel, JavaScript and SQL, balancing delivery, support and technical quality.",
+            experienceTitle: "Experience",
+            projectsTitle: "Projects",
+            contactTitle: "Let's talk?",
+            contactText: "Available for full-stack opportunities in Brazil and abroad.",
+            emailButton: "Send email",
+            resumeButton: "Resume",
+            resumeHref: "./cv/felipe-marchetti-fullstack-resume-en.pdf",
+            htmlLang: "en",
+            contactEmail: "Email",
+            contactPhone: "Phone",
+            contactLocation: "Location",
+            highlightEcommerceTitle: "E-commerce",
+            highlightEcommerceText: "Web systems, business rules and support for real users.",
+            highlightFullstackTitle: "Full-stack",
+            highlightFullstackText: "PHP/Laravel, JavaScript, React, Vue.js and Node.js.",
+            highlightDataTitle: "Data",
+            highlightDataText: "SQL Server, MySQL, MariaDB, MongoDB and data investigation.",
+            highlightMaintenanceTitle: "Maintenance",
+            highlightMaintenanceText: "Bugs, evolution, troubleshooting and continuous improvement.",
+            experienceSeniorText: "Full-stack work on the Sublimity e-commerce platform, contributing to feature evolution, bug fixing, business-rule analysis and integration maintenance. I work with PHP, Laravel, JavaScript and SQL in routines involving support for real users, data investigation, performance improvements and continuous delivery of operational fixes.",
+            experienceJuniorText: "Development and maintenance of web modules, SQL query creation, screen adjustments, technical support and production incident analysis. This role gave me a strong foundation in system sustainment, legacy-code reading, critical-flow debugging and communication with business teams to turn operational problems into objective fixes.",
+            experienceInstructorText: "Responsible for teaching computer basics, networks, hardware and technology fundamentals to groups with different levels of experience. This strengthened my teaching skills, content organization, technical communication and ability to explain complex problems in a simple way.",
+            experienceSupportText: "Support and incident diagnosis in a commercial automation environment, helping users solve operational problems, configure systems and identify recurring failures. This was an important foundation for understanding business urgency, production support and the real impact of software in companies' daily routines.",
+            skillLanguages: "Languages",
+            skillFrontend: "Front-end",
+            skillBackend: "Back-end",
+            skillDatabase: "Databases & BaaS",
+            skillDevops: "DevOps & Tools",
+            skillAi: "AI Tools",
+            projectOneKind: "Professional case",
+            projectOneText: "Real e-commerce platform, maintenance, queries and product evolution.",
+            projectTwoKind: "Case in progress",
+            projectTwoText: "Queries, modeling and diagnosis of data inconsistencies.",
+            projectThreeKind: "Personal project",
+            projectThreeText: "Space for public demos with API, front-end and deployment."
+          }
+        };
+
+        const applyLanguage = (lang) => {
+          const dictionary = translations[lang] || translations.pt;
+          document.documentElement.lang = dictionary.htmlLang;
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.dataset.i18n;
+            if (dictionary[key]) node.textContent = dictionary[key];
+          });
+          const resume = document.querySelector("[data-resume-link]");
+          if (resume) resume.setAttribute("href", dictionary.resumeHref);
+          document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+            button.classList.toggle("active", button.dataset.langSwitch === lang);
+          });
+          localStorage.setItem("portfolioLanguage", lang);
+        };
+
+        document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+          button.addEventListener("click", () => applyLanguage(button.dataset.langSwitch));
+        });
+        applyLanguage(localStorage.getItem("portfolioLanguage") || "pt");
+
         const surfaces = document.querySelectorAll("[data-spotlight]");
         surfaces.forEach((surface) => {
           let frame = 0;

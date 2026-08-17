@@ -131,6 +131,38 @@ h1 {
   padding: 8px 12px;
 }
 
+.language-toggle {
+  background: #181819;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 24px;
+  padding: 4px;
+}
+
+.language-toggle button {
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  min-height: 36px;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.language-toggle button.active {
+  background: var(--accent);
+  color: #191919;
+}
+
 .contact-list {
   border-bottom: 1px solid var(--line);
   border-top: 1px solid var(--line);
@@ -188,6 +220,10 @@ h1 {
   gap: 10px;
   grid-template-columns: 1fr 1fr;
   margin-top: 24px;
+}
+
+.download-row.single {
+  grid-template-columns: 1fr;
 }
 
 .download-row a,
@@ -336,6 +372,42 @@ h1 {
   margin-bottom: 8px;
 }
 
+.skill-groups {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.skill-group {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  padding: 18px;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.skill-group-title {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.skill-group-title svg {
+  color: var(--accent);
+}
+
+.skill-group-title h3 {
+  font-size: 1rem;
+  margin: 0;
+  transition: color 180ms ease;
+}
+
 .skill-list {
   display: flex;
   flex-wrap: wrap;
@@ -433,6 +505,7 @@ h1 {
   }
 
   .download-row a:hover,
+  .language-toggle button:hover,
   .primary-action:hover {
     background: #ffe68f;
     box-shadow: 0 10px 24px rgba(255, 219, 112, 0.18);
@@ -440,6 +513,7 @@ h1 {
   }
 
   .highlight-card:hover,
+  .skill-group:hover,
   .timeline-item:hover,
   .project-card:hover {
     background: var(--panel-hover);
@@ -454,6 +528,7 @@ h1 {
   }
 
   .highlight-card:hover h3,
+  .skill-group:hover h3,
   .timeline-item:hover h3,
   .project-card:hover h3 {
     color: var(--accent);
@@ -506,6 +581,7 @@ h1 {
   }
 
   .highlight-grid,
+  .skill-groups,
   .project-grid,
   .contact-section {
     grid-template-columns: 1fr;
