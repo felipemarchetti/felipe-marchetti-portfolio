@@ -46,7 +46,7 @@
         justify-content: center;
         margin: 0 auto;
         max-width: 1220px;
-        padding: 84px 24px 44px;
+        padding: 78px 24px 36px;
       }
 
       .sidebar,
@@ -60,9 +60,9 @@
 
       .sidebar {
         align-self: start;
-        padding: 28px;
+        padding: 24px;
         position: sticky;
-        top: 84px;
+        top: 78px;
       }
 
       .avatar {
@@ -74,9 +74,9 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 3rem;
         font-weight: 900;
-        height: 184px;
+        height: 168px;
         justify-content: center;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
         overflow: hidden;
         transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
@@ -85,7 +85,8 @@
         display: block;
         height: 100%;
         object-fit: cover;
-        object-position: 58% 26%;
+        object-position: 58% 18%;
+        transform: scale(0.94);
         width: 100%;
       }
 
@@ -113,7 +114,7 @@
         display: inline-flex;
         font-size: 0.9rem;
         font-weight: 700;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
         padding: 8px 12px;
       }
 
@@ -124,7 +125,7 @@
         display: grid;
         gap: 4px;
         grid-template-columns: 1fr 1fr;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
         padding: 4px;
       }
 
@@ -163,8 +164,8 @@
         border-bottom: 1px solid var(--line);
         border-top: 1px solid var(--line);
         display: grid;
-        gap: 16px;
-        padding: 22px 0;
+        gap: 10px;
+        padding: 16px 0;
       }
 
       .contact-list a,
@@ -173,7 +174,7 @@
         display: grid;
         gap: 4px;
         margin: 0 -8px;
-        padding: 8px;
+        padding: 6px 8px;
         transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
@@ -235,7 +236,7 @@
         display: grid;
         gap: 10px;
         grid-template-columns: 1fr;
-        margin-top: 24px;
+        margin-top: 18px;
       }
 
       .download-row a,
@@ -287,7 +288,7 @@
         transform: translateY(-1px);
       }
 
-      .section { padding: 34px; scroll-margin-top: 86px; }
+      .section { padding: 34px; scroll-margin-top: 104px; }
       .section + .section { border-top: 1px solid var(--line); }
 
       .intro h2 {
@@ -345,15 +346,26 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .about-facts span {
+      .about-fact {
+        align-items: center;
         background: var(--accent-soft);
         border: 1px solid rgba(255, 219, 112, 0.22);
         border-radius: 12px;
         color: var(--accent);
+        display: flex;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.78rem;
         font-weight: 800;
+        gap: 9px;
+        min-height: 48px;
         padding: 10px 12px;
+      }
+
+      .about-fact img {
+        display: block;
+        flex: 0 0 auto;
+        height: 22px;
+        width: 22px;
       }
 
       .highlight-card,
@@ -648,6 +660,7 @@
         <nav class="nav" style="left:0;position:fixed;right:0;top:0;z-index:50" aria-label="Portfolio">
           <a href="#about" data-i18n="navAbout">Sobre</a>
           <a href="#resume" data-i18n="navResume">Experiências</a>
+          <a href="#skills" data-i18n="navSkills">Skills</a>
           <a href="#projects" data-i18n="navProjects">Projetos</a>
           <a href="#contact" data-i18n="navContact">Contato</a>
         </nav>
@@ -683,10 +696,10 @@
             <h3 data-i18n="aboutMeTitle">Sobre mim</h3>
             <p data-i18n="aboutMeText">Sou formado em Ciência da Computação, tenho mais de 5 anos de experiência codando e gosto de construir soluções web com visão prática de produto, suporte e operação.</p>
             <div class="about-facts">
-              <span data-i18n="degreeFact">Bacharel em Ciência da Computação</span>
-              <span data-i18n="codingFact">5+ anos codando</span>
-              <span data-i18n="portugueseFact">Português nativo</span>
-              <span data-i18n="englishFact">Inglês avançado</span>
+              <div class="about-fact"><img alt="" src="./assets/degree-icon.svg"><span data-i18n="degreeFact">Bacharel em Ciência da Computação</span></div>
+              <div class="about-fact"><img alt="" src="./assets/coding-icon.svg"><span data-i18n="codingFact">5+ anos codando</span></div>
+              <div class="about-fact"><img alt="" src="./assets/portuguese-icon.svg"><span data-i18n="portugueseFact">Português nativo</span></div>
+              <div class="about-fact"><img alt="" src="./assets/english-icon.svg"><span data-i18n="englishFact">Inglês avançado</span></div>
             </div>
           </div>
         </section>
@@ -727,7 +740,7 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="skills">
           <div class="section-title"><h2>Stack</h2></div>
           <div class="skill-groups">
             <article class="skill-group" data-spotlight>
@@ -818,7 +831,7 @@
           </div>
           <div class="contact-actions">
             <a class="primary-action" href="mailto:felipecmarchetti@gmail.com"><span data-i18n="emailButton">Enviar email</span></a>
-            <a class="primary-action whatsapp-action" href="https://wa.me/5511968660968"><img alt="" src="./assets/whatsapp-icon.svg">WhatsApp</a>
+            <a class="primary-action whatsapp-action" href="https://wa.me/5511968660968" target="_blank" rel="noreferrer"><img alt="" src="./assets/whatsapp-icon.svg">WhatsApp</a>
           </div>
         </section>
       </section>
@@ -830,6 +843,7 @@
             status: "Open to work",
             navAbout: "Sobre",
             navResume: "Experiências",
+            navSkills: "Skills",
             navProjects: "Projetos",
             navContact: "Contato",
             heroTitle: "Full-stack focado em e-commerce, sistemas web e dados.",
@@ -892,6 +906,7 @@
             status: "Open to work",
             navAbout: "About",
             navResume: "Experience",
+            navSkills: "Skills",
             navProjects: "Projects",
             navContact: "Contact",
             heroTitle: "Full-stack focused on e-commerce, web systems and data.",

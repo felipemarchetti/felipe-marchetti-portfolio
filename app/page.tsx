@@ -204,6 +204,7 @@ export default function Home() {
         >
           <a href="#about" data-i18n="navAbout">Sobre</a>
           <a href="#resume" data-i18n="navResume">Experiências</a>
+          <a href="#skills" data-i18n="navSkills">Skills</a>
           <a href="#projects" data-i18n="navProjects">Projetos</a>
           <a href="#contact" data-i18n="navContact">Contato</a>
         </nav>
@@ -235,10 +236,22 @@ export default function Home() {
               e gosto de construir soluções web com visão prática de produto, suporte e operação.
             </p>
             <div className="about-facts">
-              <span data-i18n="degreeFact">Bacharel em Ciência da Computação</span>
-              <span data-i18n="codingFact">5+ anos codando</span>
-              <span data-i18n="portugueseFact">Português nativo</span>
-              <span data-i18n="englishFact">Inglês avançado</span>
+              <div className="about-fact">
+                <img src="/assets/degree-icon.svg" alt="" />
+                <span data-i18n="degreeFact">Bacharel em Ciência da Computação</span>
+              </div>
+              <div className="about-fact">
+                <img src="/assets/coding-icon.svg" alt="" />
+                <span data-i18n="codingFact">5+ anos codando</span>
+              </div>
+              <div className="about-fact">
+                <img src="/assets/portuguese-icon.svg" alt="" />
+                <span data-i18n="portugueseFact">Português nativo</span>
+              </div>
+              <div className="about-fact">
+                <img src="/assets/english-icon.svg" alt="" />
+                <span data-i18n="englishFact">Inglês avançado</span>
+              </div>
             </div>
           </div>
         </section>
@@ -260,7 +273,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section" id="skills">
           <div className="section-title">
             <Database size={24} />
             <h2>Stack</h2>
@@ -314,7 +327,7 @@ export default function Home() {
             <a className="primary-action" href="mailto:felipecmarchetti@gmail.com">
               <Mail size={18} /> <span data-i18n="emailButton">Enviar email</span>
             </a>
-            <a className="primary-action whatsapp-action" href="https://wa.me/5511968660968">
+            <a className="primary-action whatsapp-action" href="https://wa.me/5511968660968" target="_blank" rel="noreferrer">
               <img src="/assets/whatsapp-icon.svg" alt="" /> WhatsApp
             </a>
           </div>
@@ -329,6 +342,7 @@ export default function Home() {
                   status: "Open to work",
                   navAbout: "Sobre",
                   navResume: "Experiências",
+                  navSkills: "Skills",
                   navProjects: "Projetos",
                   navContact: "Contato",
                   heroTitle: "Full-stack focado em e-commerce, sistemas web e dados.",
@@ -391,6 +405,7 @@ export default function Home() {
                   status: "Open to work",
                   navAbout: "About",
                   navResume: "Experience",
+                  navSkills: "Skills",
                   navProjects: "Projects",
                   navContact: "Contact",
                   heroTitle: "Full-stack focused on e-commerce, web systems and data.",

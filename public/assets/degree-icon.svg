@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Degree">
+  <rect width="64" height="64" rx="16" fill="#ffdb70" fill-opacity=".16"/>
+  <path d="M8 25.5 32 14l24 11.5L32 37 8 25.5Z" fill="#ffdb70"/>
+  <path d="M18 32.5v9c0 4.7 6.3 8.5 14 8.5s14-3.8 14-8.5v-9L32 39.2 18 32.5Z" fill="#f6c95f"/>
+  <path d="M52 28v13" stroke="#ffdb70" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="52" cy="45" r="3.5" fill="#ffdb70"/>
+</svg>
