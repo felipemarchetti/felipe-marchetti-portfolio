@@ -103,8 +103,8 @@ a {
   background: #151516;
   display: block;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: 50% 0;
   width: 100%;
 }
 

@@ -604,13 +604,15 @@ export default function Home() {
                 let activeIndex = 0;
 
                 const sync = () => {
+                  const lastIndex = cards.length - 1;
                   cards.forEach((card, index) => {
-                    const offset = index - activeIndex;
+                    const isPrev = index === (activeIndex - 1 + cards.length) % cards.length;
+                    const isNext = index === (activeIndex + 1) % cards.length;
                     card.dataset.carouselState =
-                      offset === 0 ? "active" :
-                      offset === -1 ? "prev" :
-                      offset === 1 ? "next" :
-                      offset < -1 ? "before" : "after";
+                      index === activeIndex ? "active" :
+                      isPrev ? "prev" :
+                      isNext ? "next" :
+                      index < activeIndex || (activeIndex === 0 && index === lastIndex) ? "before" : "after";
                   });
                   dots.forEach((dot, index) => dot.classList.toggle("active", index === activeIndex));
                 };
@@ -622,6 +624,21 @@ export default function Home() {
 
                 prev?.addEventListener("click", () => move(-1));
                 next?.addEventListener("click", () => move(1));
+                let touchStartX = 0;
+                let touchStartY = 0;
+                carousel.addEventListener("touchstart", (event) => {
+                  const touch = event.touches[0];
+                  touchStartX = touch.clientX;
+                  touchStartY = touch.clientY;
+                }, { passive: true });
+                carousel.addEventListener("touchend", (event) => {
+                  const touch = event.changedTouches[0];
+                  const deltaX = touch.clientX - touchStartX;
+                  const deltaY = touch.clientY - touchStartY;
+                  if (Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35) {
+                    move(deltaX < 0 ? 1 : -1);
+                  }
+                }, { passive: true });
                 dots.forEach((dot, index) => {
                   dot.addEventListener("click", () => {
                     activeIndex = index;
