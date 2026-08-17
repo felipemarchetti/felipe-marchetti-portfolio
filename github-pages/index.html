@@ -673,6 +673,26 @@
         width: 20px;
       }
 
+      .back-to-top {
+        align-items: center;
+        background: var(--accent);
+        border: 0;
+        border-radius: 999px;
+        bottom: 22px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+        color: #191919;
+        cursor: pointer;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        opacity: 0.5;
+        position: fixed;
+        right: 22px;
+        transition: opacity 180ms ease, transform 180ms ease;
+        width: 44px;
+        z-index: 45;
+      }
+
       @media (hover: hover) and (pointer: fine) {
         [data-spotlight]::before {
           background:
@@ -763,6 +783,16 @@
         }
 
         .contact-section:hover { background: rgba(255, 219, 112, 0.035); }
+
+        .back-to-top:hover {
+          opacity: 1;
+          transform: translateY(-2px);
+        }
+      }
+
+      .back-to-top.is-scrolling {
+        opacity: 1;
+        transform: translateY(-2px);
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1017,7 +1047,7 @@
                 </div>
                 <h3>Sublimity Ecommerce</h3>
                 <p data-i18n="projectSublimityText">E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.</p>
-                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>SQL</span></div>
+                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>SQL Server</span><span>Node.js</span></div>
               </div>
             </article>
             <article class="project-card" data-project-card="1" data-spotlight>
@@ -1029,7 +1059,7 @@
                 </div>
                 <h3>MamaEliza</h3>
                 <p data-i18n="projectMamaElizaText">Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.</p>
-                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>CSS</span></div>
+                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>CSS</span><span>MySQL</span></div>
               </div>
             </article>
             <article class="project-card" data-project-card="2" data-spotlight>
@@ -1041,19 +1071,19 @@
                 </div>
                 <h3>PDV Online</h3>
                 <p data-i18n="projectPdvText">PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.</p>
-                <div class="project-tags"><span>PHP</span><span>JavaScript</span><span>CSS</span></div>
+                <div class="project-tags"><span>PHP</span><span>JavaScript</span><span>CSS</span><span>MongoDB</span></div>
               </div>
             </article>
             <article class="project-card" data-project-card="3" data-spotlight>
               <div class="project-logo-wrap"><img class="project-logo" alt="" loading="lazy" src="./assets/project-easyfarma-logo.png"></div>
               <div class="project-card-body">
                 <div class="project-meta">
-                  <small data-i18n="projectEasyFarmaKind">Projeto offline</small>
+                  <small data-i18n="projectEasyFarmaKind">Projeto autoral</small>
                   <span class="private-badge"><span aria-hidden="true">🔒</span><span data-i18n="privateLabel">Privado</span></span>
                 </div>
                 <h3>EasyFarma</h3>
                 <p data-i18n="projectEasyFarmaText">Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores.</p>
-                <div class="project-tags"><span>Java</span><span>Rede local</span><span>Banco offline</span></div>
+                <div class="project-tags"><span>Java</span><span>PostgreSQL</span></div>
               </div>
             </article>
             </div>
@@ -1073,6 +1103,11 @@
           </div>
         </section>
       </section>
+      <button class="back-to-top" type="button" aria-label="Voltar ao topo" data-back-to-top>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </main>
     <script>
       (() => {
@@ -1140,7 +1175,7 @@
             projectMamaElizaText: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
             projectPdvKind: "Projeto autoral",
             projectPdvText: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
-            projectEasyFarmaKind: "Projeto offline",
+            projectEasyFarmaKind: "Projeto autoral",
             projectEasyFarmaText: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores."
           },
           en: {
@@ -1206,7 +1241,7 @@
             projectMamaElizaText: "Online delivery menu with a customer ordering flow and a complete admin panel for orders, products, ingredients, cash closing and reports.",
             projectPdvKind: "Personal project",
             projectPdvText: "Simplified web POS for non-fiscal sales, with stock control, revenue view, flat or percentage discounts and progressive promotions.",
-            projectEasyFarmaKind: "Offline project",
+            projectEasyFarmaKind: "Personal project",
             projectEasyFarmaText: "Desktop system for pharmacies, with sales, product registration and stock control over a local network, running offline across multiple computers."
           }
         };
@@ -1320,6 +1355,17 @@
           });
           sync();
         });
+
+        const backToTop = document.querySelector("[data-back-to-top]");
+        const syncBackToTop = () => {
+          if (window.scrollY <= 16) backToTop?.classList.remove("is-scrolling");
+        };
+        backToTop?.addEventListener("click", () => {
+          backToTop.classList.add("is-scrolling");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          syncBackToTop();
+        });
+        window.addEventListener("scroll", syncBackToTop, { passive: true });
 
         const surfaces = document.querySelectorAll("[data-spotlight]");
         surfaces.forEach((surface) => {

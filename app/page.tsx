@@ -1,4 +1,5 @@
 import {
+  ArrowUp,
   BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
@@ -153,7 +154,7 @@ const projects = [
     kind: "Projeto profissional",
     textKey: "projectSublimityText",
     text: "E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.",
-    tags: ["PHP", "Laravel", "JavaScript", "SQL"],
+    tags: ["PHP", "Laravel", "JavaScript", "SQL Server", "Node.js"],
     logo: "/assets/project-sublimity-logo.svg",
     locked: true,
   },
@@ -163,7 +164,7 @@ const projects = [
     kind: "Projeto autoral",
     textKey: "projectMamaElizaText",
     text: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
-    tags: ["PHP", "Laravel", "JavaScript", "CSS"],
+    tags: ["PHP", "Laravel", "JavaScript", "CSS", "MySQL"],
     logo: "/assets/project-mamaeliza-logo.png",
     locked: true,
   },
@@ -173,17 +174,17 @@ const projects = [
     kind: "Projeto autoral",
     textKey: "projectPdvText",
     text: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
-    tags: ["PHP", "JavaScript", "CSS"],
+    tags: ["PHP", "JavaScript", "CSS", "MongoDB"],
     logo: "/assets/project-pdv-logo.png",
     locked: true,
   },
   {
     name: "EasyFarma",
     kindKey: "projectEasyFarmaKind",
-    kind: "Projeto offline",
+    kind: "Projeto autoral",
     textKey: "projectEasyFarmaText",
     text: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores.",
-    tags: ["Java", "Rede local", "Banco offline"],
+    tags: ["Java", "PostgreSQL"],
     logo: "/assets/project-easyfarma-logo.png",
     locked: true,
   },
@@ -399,6 +400,9 @@ export default function Home() {
           </div>
         </section>
       </section>
+      <button className="back-to-top" type="button" aria-label="Voltar ao topo" data-back-to-top>
+        <ArrowUp size={18} />
+      </button>
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -467,7 +471,7 @@ export default function Home() {
                   projectMamaElizaText: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
                   projectPdvKind: "Projeto autoral",
                   projectPdvText: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
-                  projectEasyFarmaKind: "Projeto offline",
+                  projectEasyFarmaKind: "Projeto autoral",
                   projectEasyFarmaText: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores."
                 },
                 en: {
@@ -533,7 +537,7 @@ export default function Home() {
                   projectMamaElizaText: "Online delivery menu with a customer ordering flow and a complete admin panel for orders, products, ingredients, cash closing and reports.",
                   projectPdvKind: "Personal project",
                   projectPdvText: "Simplified web POS for non-fiscal sales, with stock control, revenue view, flat or percentage discounts and progressive promotions.",
-                  projectEasyFarmaKind: "Offline project",
+                  projectEasyFarmaKind: "Personal project",
                   projectEasyFarmaText: "Desktop system for pharmacies, with sales, product registration and stock control over a local network, running offline across multiple computers."
                 }
               };
@@ -647,6 +651,17 @@ export default function Home() {
                 });
                 sync();
               });
+
+              const backToTop = document.querySelector("[data-back-to-top]");
+              const syncBackToTop = () => {
+                if (window.scrollY <= 16) backToTop?.classList.remove("is-scrolling");
+              };
+              backToTop?.addEventListener("click", () => {
+                backToTop.classList.add("is-scrolling");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                syncBackToTop();
+              });
+              window.addEventListener("scroll", syncBackToTop, { passive: true });
 
               const surfaces = document.querySelectorAll("[data-spotlight]");
               surfaces.forEach((surface) => {
