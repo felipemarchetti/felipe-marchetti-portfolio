@@ -486,6 +486,48 @@ export default function Home() {
               });
               applyLanguage(localStorage.getItem("portfolioLanguage") || "pt");
 
+              const navLinks = Array.from(document.querySelectorAll(".nav a[href^='#']"));
+              const sections = navLinks
+                .map((link) => document.querySelector(link.getAttribute("href")))
+                .filter(Boolean);
+              let navFrame = 0;
+              const setActiveNav = () => {
+                const nav = document.querySelector(".nav");
+                const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+                const scrollPosition = window.scrollY + navHeight + 90;
+                const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+                let activeId = sections[0]?.id;
+
+                if (isAtBottom) {
+                  activeId = sections[sections.length - 1]?.id;
+                } else {
+                  sections.forEach((section) => {
+                    if (section.offsetTop <= scrollPosition) activeId = section.id;
+                  });
+                }
+
+                navLinks.forEach((link) => {
+                  const isActive = link.getAttribute("href") === "#" + activeId;
+                  link.classList.toggle("active", isActive);
+                  if (isActive) {
+                    link.setAttribute("aria-current", "true");
+                  } else {
+                    link.removeAttribute("aria-current");
+                  }
+                });
+              };
+              const queueActiveNav = () => {
+                if (navFrame) return;
+                navFrame = requestAnimationFrame(() => {
+                  setActiveNav();
+                  navFrame = 0;
+                });
+              };
+              window.addEventListener("scroll", queueActiveNav, { passive: true });
+              window.addEventListener("resize", queueActiveNav);
+              navLinks.forEach((link) => link.addEventListener("click", () => setTimeout(setActiveNav, 300)));
+              setActiveNav();
+
               const surfaces = document.querySelectorAll("[data-spotlight]");
               surfaces.forEach((surface) => {
                 let frame = 0;

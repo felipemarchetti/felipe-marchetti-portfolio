@@ -47,6 +47,7 @@
         margin: 0 auto;
         max-width: 1220px;
         padding: 98px 24px 24px;
+        position: relative;
       }
 
       .sidebar,
@@ -59,10 +60,13 @@
       }
 
       .sidebar {
-        align-self: start;
+        bottom: 25px;
+        left: max(24px, calc(50vw - 586px));
+        overflow: hidden;
         padding: 24px;
-        position: sticky;
+        position: fixed;
         top: 98px;
+        width: 300px;
       }
 
       .avatar {
@@ -164,8 +168,8 @@
         border-bottom: 1px solid var(--line);
         border-top: 1px solid var(--line);
         display: grid;
-        gap: 11px;
-        padding: 18px 0;
+        gap: 8px;
+        padding: 14px 0;
       }
 
       .contact-list a,
@@ -174,7 +178,7 @@
         display: grid;
         gap: 4px;
         margin: 0 -8px;
-        padding: 8px;
+        padding: 4px 8px;
         transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
@@ -255,7 +259,7 @@
         transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
       }
 
-      .main-card { overflow: visible; }
+      .main-card { grid-column: 2; overflow: visible; }
 
       .nav {
         background: #181819;
@@ -282,7 +286,8 @@
         transition: background 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
-      .nav a:hover {
+      .nav a:hover,
+      .nav a.active {
         background: var(--panel-soft);
         color: var(--accent);
         transform: translateY(-1px);
@@ -532,7 +537,6 @@
         .sidebar:hover {
           border-color: var(--accent-line);
           box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
-          transform: translateY(-3px);
         }
 
         .sidebar:hover .avatar {
@@ -603,7 +607,8 @@
           max-width: 720px;
           padding: 84px 18px 18px;
         }
-        .sidebar { position: static; }
+        .sidebar { bottom: auto; left: auto; position: static; width: auto; }
+        .main-card { grid-column: auto; }
         .avatar { height: 150px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
         .highlight-grid, .about-facts, .skill-groups, .skill-list, .project-grid, .contact-section { grid-template-columns: 1fr; }
@@ -986,6 +991,48 @@
           button.addEventListener("click", () => applyLanguage(button.dataset.langSwitch));
         });
         applyLanguage(localStorage.getItem("portfolioLanguage") || "pt");
+
+        const navLinks = Array.from(document.querySelectorAll(".nav a[href^='#']"));
+        const sections = navLinks
+          .map((link) => document.querySelector(link.getAttribute("href")))
+          .filter(Boolean);
+        let navFrame = 0;
+        const setActiveNav = () => {
+          const nav = document.querySelector(".nav");
+          const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+          const scrollPosition = window.scrollY + navHeight + 90;
+          const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+          let activeId = sections[0]?.id;
+
+          if (isAtBottom) {
+            activeId = sections[sections.length - 1]?.id;
+          } else {
+            sections.forEach((section) => {
+              if (section.offsetTop <= scrollPosition) activeId = section.id;
+            });
+          }
+
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute("href") === "#" + activeId;
+            link.classList.toggle("active", isActive);
+            if (isActive) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+        const queueActiveNav = () => {
+          if (navFrame) return;
+          navFrame = requestAnimationFrame(() => {
+            setActiveNav();
+            navFrame = 0;
+          });
+        };
+        window.addEventListener("scroll", queueActiveNav, { passive: true });
+        window.addEventListener("resize", queueActiveNav);
+        navLinks.forEach((link) => link.addEventListener("click", () => setTimeout(setActiveNav, 300)));
+        setActiveNav();
 
         const surfaces = document.querySelectorAll("[data-spotlight]");
         surfaces.forEach((surface) => {
