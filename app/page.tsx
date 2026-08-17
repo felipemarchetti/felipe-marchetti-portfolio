@@ -1,15 +1,20 @@
 import {
   BriefcaseBusiness,
+  Braces,
   Cloud,
   Code2,
   Cpu,
   Database,
   Download,
+  GitBranch,
+  Languages,
+  Link2,
   Mail,
   MapPin,
   Phone,
   ServerCog,
   ShoppingCart,
+  Sparkles,
   Wrench,
 } from "lucide-react";
 
@@ -17,6 +22,7 @@ const contacts = [
   { icon: Mail, label: "Email", labelKey: "contactEmail", value: "felipecmarchetti@gmail.com", href: "mailto:felipecmarchetti@gmail.com" },
   { icon: Phone, label: "Telefone", labelKey: "contactPhone", value: "+55 11 96866-0968", href: "tel:+5511968660968" },
   { icon: MapPin, label: "Localização", labelKey: "contactLocation", value: "Campo Limpo Paulista, SP" },
+  { icon: Link2, label: "LinkedIn", labelKey: "contactLinkedin", value: "felipe-cunha-marchetti", href: "https://www.linkedin.com/in/felipe-cunha-marchetti/" },
 ];
 
 const highlights = [
@@ -29,6 +35,7 @@ const highlights = [
 const experiences = [
   [
     "Programador PHP Pleno",
+    "roleMidPhp",
     "ISY Sistemas",
     "Jan/2024 - atual",
     "experienceSeniorText",
@@ -36,6 +43,7 @@ const experiences = [
   ],
   [
     "Programador PHP Junior",
+    "roleJuniorPhp",
     "ISY Sistemas",
     "Set/2021 - Dez/2023",
     "experienceJuniorText",
@@ -43,6 +51,7 @@ const experiences = [
   ],
   [
     "Instrutor de Informática",
+    "roleInstructor",
     "Go Think Educação Profissional",
     "Set/2020 - Jul/2021",
     "experienceInstructorText",
@@ -50,6 +59,7 @@ const experiences = [
   ],
   [
     "Suporte de TI",
+    "roleSupport",
     "GZ Sistemas Automação Comercial",
     "Nov/2019 - Set/2020",
     "experienceSupportText",
@@ -57,6 +67,7 @@ const experiences = [
   ],
   [
     "Estagiário de TI",
+    "roleIntern",
     "Secretaria de Educação de Francisco Morato",
     "Mar/2018 - Out/2019",
     "experienceInternText",
@@ -76,7 +87,6 @@ const skillGroups = [
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
       { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" },
       { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
-      { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" },
     ],
   },
   {
@@ -97,8 +107,7 @@ const skillGroups = [
     skills: [
       { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-      { name: "REST APIs", fallback: "API" },
-      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { name: "REST APIs", glyph: Braces },
     ],
   },
   {
@@ -113,7 +122,6 @@ const skillGroups = [
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
       { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
       { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
-      { name: "SQL Queries", fallback: "SQL" },
     ],
   },
   {
@@ -121,12 +129,11 @@ const skillGroups = [
     title: "Cloud & DevOps",
     titleKey: "skillDevops",
     skills: [
-      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "S3", fallback: "S3" },
+      { name: "AWS / S3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
       { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
       { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" },
-      { name: "CI/CD", fallback: "CI" },
+      { name: "CI/CD", glyph: GitBranch },
     ],
   },
   {
@@ -135,9 +142,7 @@ const skillGroups = [
     titleKey: "skillAi",
     skills: [
       { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
-      { name: "ChatGPT", fallback: "GPT" },
-      { name: "Codex", fallback: "CX" },
-      { name: "AI-assisted workflow", fallback: "AI" },
+      { name: "AI-assisted workflow", glyph: Sparkles },
     ],
   },
 ];
@@ -158,8 +163,12 @@ export default function Home() {
         <p className="role">Full-Stack PHP Developer</p>
 
         <div className="language-toggle" aria-label="Language selector">
-          <button className="active" type="button" data-lang-switch="pt">🇧🇷 PT</button>
-          <button type="button" data-lang-switch="en">🇺🇸 EN</button>
+          <button className="active" type="button" data-lang-switch="pt">
+            <img alt="" src="https://flagcdn.com/w20/br.png" /> PT
+          </button>
+          <button type="button" data-lang-switch="en">
+            <img alt="" src="https://flagcdn.com/w20/us.png" /> EN
+          </button>
         </div>
 
         <div className="contact-list">
@@ -180,6 +189,21 @@ export default function Home() {
               <div key={label}>{content}</div>
             );
           })}
+        </div>
+
+        <div className="language-list">
+          <div className="language-heading">
+            <Languages size={17} />
+            <small data-i18n="languagesTitle">Idiomas</small>
+          </div>
+          <div className="language-item">
+            <span data-i18n="portugueseLabel">Português</span>
+            <strong data-i18n="portugueseLevel">Nativo</strong>
+          </div>
+          <div className="language-item">
+            <span data-i18n="englishLabel">Inglês</span>
+            <strong data-i18n="englishLevel">Avançado</strong>
+          </div>
         </div>
 
         <div className="download-row single">
@@ -224,10 +248,10 @@ export default function Home() {
             <h2 data-i18n="experienceTitle">Experiência</h2>
           </div>
           <div className="timeline">
-            {experiences.map(([role, company, period, textKey, text]) => (
+            {experiences.map(([role, roleKey, company, period, textKey, text]) => (
               <article className="timeline-item" data-spotlight key={`${role}-${period}`}>
                 <span>{period}</span>
-                <h3>{role}</h3>
+                <h3 data-i18n={roleKey}>{role}</h3>
                 <strong>{company}</strong>
                 <p data-i18n={textKey}>{text}</p>
               </article>
@@ -248,16 +272,24 @@ export default function Home() {
                   <h3 data-i18n={titleKey}>{title}</h3>
                 </div>
                 <div className="skill-list">
-                  {skills.map((skill) => (
-                    <span className="tech-item" data-spotlight key={`${title}-${skill.name}`}>
-                      {skill.icon ? (
-                        <img src={skill.icon} alt="" loading="lazy" />
-                      ) : (
-                        <span className="tech-fallback" aria-hidden="true">{skill.fallback}</span>
-                      )}
-                      {skill.name}
-                    </span>
-                  ))}
+                  {skills.map((skill) => {
+                    const Glyph = skill.glyph;
+
+                    return (
+                      <span className="tech-item" data-spotlight key={`${title}-${skill.name}`}>
+                        {skill.icon ? (
+                          <img src={skill.icon} alt="" loading="lazy" />
+                        ) : Glyph ? (
+                          <span className="tech-generic" aria-hidden="true">
+                            <Glyph size={16} />
+                          </span>
+                        ) : (
+                          <span className="tech-fallback" aria-hidden="true">{skill.fallback}</span>
+                        )}
+                        {skill.name}
+                      </span>
+                    );
+                  })}
                 </div>
               </article>
             ))}
@@ -312,6 +344,17 @@ export default function Home() {
                   contactEmail: "Email",
                   contactPhone: "Telefone",
                   contactLocation: "Localização",
+                  contactLinkedin: "LinkedIn",
+                  languagesTitle: "Idiomas",
+                  portugueseLabel: "Português",
+                  portugueseLevel: "Nativo",
+                  englishLabel: "Inglês",
+                  englishLevel: "Avançado",
+                  roleMidPhp: "Programador PHP Pleno",
+                  roleJuniorPhp: "Programador PHP Junior",
+                  roleInstructor: "Instrutor de Informática",
+                  roleSupport: "Suporte de TI",
+                  roleIntern: "Estagiário de TI",
                   highlightEcommerceTitle: "E-commerce",
                   highlightEcommerceText: "Sistemas web, regras de negócio e suporte a usuários reais.",
                   highlightFullstackTitle: "Full-stack",
@@ -357,6 +400,17 @@ export default function Home() {
                   contactEmail: "Email",
                   contactPhone: "Phone",
                   contactLocation: "Location",
+                  contactLinkedin: "LinkedIn",
+                  languagesTitle: "Languages",
+                  portugueseLabel: "Portuguese",
+                  portugueseLevel: "Native",
+                  englishLabel: "English",
+                  englishLevel: "Advanced",
+                  roleMidPhp: "Mid-level PHP Developer",
+                  roleJuniorPhp: "Junior PHP Developer",
+                  roleInstructor: "IT Instructor",
+                  roleSupport: "IT Support Technician",
+                  roleIntern: "IT Intern",
                   highlightEcommerceTitle: "E-commerce",
                   highlightEcommerceText: "Web systems, business rules and support for real users.",
                   highlightFullstackTitle: "Full-stack",
