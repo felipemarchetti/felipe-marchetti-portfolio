@@ -154,6 +154,7 @@ const projects = [
     textKey: "projectSublimityText",
     text: "E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.",
     tags: ["PHP", "Laravel", "JavaScript", "SQL"],
+    logo: "/assets/project-sublimity-logo.svg",
     locked: true,
   },
   {
@@ -163,7 +164,7 @@ const projects = [
     textKey: "projectMamaElizaText",
     text: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
     tags: ["PHP", "Laravel", "JavaScript", "CSS"],
-    images: ["/assets/project-mamaeliza-store.png", "/assets/project-mamaeliza-admin.png"],
+    logo: "/assets/project-mamaeliza-logo.png",
     locked: true,
   },
   {
@@ -173,7 +174,7 @@ const projects = [
     textKey: "projectPdvText",
     text: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
     tags: ["PHP", "JavaScript", "CSS"],
-    images: ["/assets/project-pdv-sale.png", "/assets/project-pdv-cart.png"],
+    logo: "/assets/project-pdv-logo.png",
     locked: true,
   },
   {
@@ -183,6 +184,7 @@ const projects = [
     textKey: "projectEasyFarmaText",
     text: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores.",
     tags: ["Java", "Rede local", "Banco offline"],
+    logo: "/assets/project-easyfarma-logo.png",
     locked: true,
   },
 ];
@@ -351,17 +353,11 @@ export default function Home() {
             <button className="carousel-control carousel-control-prev" type="button" aria-label="Projeto anterior" data-carousel-prev>
               <ChevronLeft size={19} />
             </button>
-            <div className="project-track">
-              {projects.map(({ name, kindKey, kind, textKey, text, tags, images, locked }) => (
-                <article className="project-card" data-spotlight key={name}>
-                  <div className="project-media">
-                    {images ? (
-                      images.map((image) => <img src={image} alt="" loading="lazy" key={image} />)
-                    ) : (
-                      <div className="project-placeholder">
-                        <ServerCog size={42} />
-                      </div>
-                    )}
+            <div className="project-stage">
+              {projects.map(({ name, kindKey, kind, textKey, text, tags, logo, locked }, index) => (
+                <article className="project-card" data-project-card={index} data-spotlight key={name}>
+                  <div className="project-logo-wrap">
+                    <img className="project-logo" src={logo} alt="" loading="lazy" />
                   </div>
                   <div className="project-card-body">
                     <div className="project-meta">
@@ -384,6 +380,9 @@ export default function Home() {
             <button className="carousel-control carousel-control-next" type="button" aria-label="Próximo projeto" data-carousel-next>
               <ChevronRight size={19} />
             </button>
+            <div className="carousel-dots" aria-hidden="true">
+              {projects.map((project, index) => <span data-carousel-dot={index} key={`${project.name}-dot`} />)}
+            </div>
           </div>
         </section>
 
@@ -598,18 +597,38 @@ export default function Home() {
               setActiveNav();
 
               document.querySelectorAll("[data-project-carousel]").forEach((carousel) => {
-                const track = carousel.querySelector(".project-track");
+                const cards = Array.from(carousel.querySelectorAll("[data-project-card]"));
+                const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
                 const prev = carousel.querySelector("[data-carousel-prev]");
                 const next = carousel.querySelector("[data-carousel-next]");
-                const move = (direction) => {
-                  if (!track) return;
-                  track.scrollBy({
-                    left: direction * track.clientWidth * 0.82,
-                    behavior: "smooth"
+                let activeIndex = 0;
+
+                const sync = () => {
+                  cards.forEach((card, index) => {
+                    const offset = index - activeIndex;
+                    card.dataset.carouselState =
+                      offset === 0 ? "active" :
+                      offset === -1 ? "prev" :
+                      offset === 1 ? "next" :
+                      offset < -1 ? "before" : "after";
                   });
+                  dots.forEach((dot, index) => dot.classList.toggle("active", index === activeIndex));
                 };
+
+                const move = (direction) => {
+                  activeIndex = (activeIndex + direction + cards.length) % cards.length;
+                  sync();
+                };
+
                 prev?.addEventListener("click", () => move(-1));
                 next?.addEventListener("click", () => move(1));
+                dots.forEach((dot, index) => {
+                  dot.addEventListener("click", () => {
+                    activeIndex = index;
+                    sync();
+                  });
+                });
+                sync();
               });
 
               const surfaces = document.querySelectorAll("[data-spotlight]");
