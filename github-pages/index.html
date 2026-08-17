@@ -299,22 +299,49 @@
       .skill-group-title h3 { margin: 0; }
 
       .skill-list {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
         gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .skill-list span {
+        align-items: center;
         background: var(--accent-soft);
         border: 1px solid rgba(255, 219, 112, 0.22);
-        border-radius: 999px;
+        border-radius: 14px;
         color: var(--accent);
+        display: flex;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.82rem;
         font-weight: 700;
+        gap: 9px;
+        min-height: 46px;
         overflow: hidden;
-        padding: 9px 12px;
+        padding: 10px;
         transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+      }
+
+      .tech-item img,
+      .tech-fallback {
+        flex: 0 0 auto;
+        height: 24px;
+        width: 24px;
+      }
+
+      .tech-item img {
+        display: block;
+        object-fit: contain;
+      }
+
+      .tech-fallback {
+        align-items: center;
+        background: rgba(255, 219, 112, 0.18);
+        border: 1px solid rgba(255, 219, 112, 0.28);
+        border-radius: 8px;
+        color: var(--accent);
+        display: inline-flex;
+        font-size: 0.68rem;
+        justify-content: center;
       }
 
       .project-grid {
@@ -406,7 +433,7 @@
           background: rgba(255, 219, 112, 0.2);
           border-color: var(--accent-line);
           color: #fff0b0;
-          transform: translateY(-3px) scale(1.06);
+          transform: translateY(-3px) scale(1.035);
         }
 
         .contact-section:hover { background: rgba(255, 219, 112, 0.035); }
@@ -430,7 +457,7 @@
         .sidebar { position: static; }
         .avatar { height: 150px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
-        .highlight-grid, .skill-groups, .project-grid, .contact-section { grid-template-columns: 1fr; }
+        .highlight-grid, .skill-groups, .skill-list, .project-grid, .contact-section { grid-template-columns: 1fr; }
         .primary-action { width: 100%; }
       }
 
@@ -538,6 +565,12 @@
               <strong>GZ Sistemas Automação Comercial</strong>
               <p data-i18n="experienceSupportText">Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.</p>
             </article>
+            <article class="timeline-item" data-spotlight>
+              <p class="period">Mar/2018 - Out/2019</p>
+              <h3>Estagiário de TI</h3>
+              <strong>Secretaria de Educação de Francisco Morato</strong>
+              <p data-i18n="experienceInternText">Atuação generalista em TI, apoiando infraestrutura, redes, servidores, manutenção preventiva e corretiva, suporte a usuários, montagem e manutenção de computadores e padronização de sistemas. A experiência deu uma base prática forte em operação, diagnóstico, organização de ambientes e resolução de problemas técnicos em diferentes frentes.</p>
+            </article>
           </div>
         </section>
 
@@ -546,27 +579,66 @@
           <div class="skill-groups">
             <article class="skill-group" data-spotlight>
               <div class="skill-group-title"><h3 data-i18n="skillLanguages">Linguagens</h3></div>
-              <div class="skill-list"><span data-spotlight>PHP</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span><span data-spotlight>Python</span><span data-spotlight>SQL</span><span data-spotlight>C#</span><span data-spotlight>Java</span><span data-spotlight>Go</span></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg">PHP</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg">JavaScript</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg">TypeScript</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg">Python</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg">C#</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg">Java</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg">Go</span>
+              </div>
             </article>
             <article class="skill-group" data-spotlight>
               <div class="skill-group-title"><h3 data-i18n="skillFrontend">Front-end</h3></div>
-              <div class="skill-list"><span data-spotlight>HTML5</span><span data-spotlight>CSS3</span><span data-spotlight>React</span><span data-spotlight>Vue.js</span><span data-spotlight>JavaScript</span><span data-spotlight>TypeScript</span></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg">HTML5</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg">CSS3</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg">React</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg">Vue.js</span>
+              </div>
             </article>
             <article class="skill-group" data-spotlight>
               <div class="skill-group-title"><h3 data-i18n="skillBackend">Back-end</h3></div>
-              <div class="skill-list"><span data-spotlight>Laravel</span><span data-spotlight>Node.js</span><span data-spotlight>APIs REST</span><span data-spotlight>PHP</span><span data-spotlight>Docker</span></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg">Laravel</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg">Node.js</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">API</span>REST APIs</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg">Docker</span>
+              </div>
             </article>
             <article class="skill-group" data-spotlight>
               <div class="skill-group-title"><h3 data-i18n="skillDatabase">Databases & BaaS</h3></div>
-              <div class="skill-list"><span data-spotlight>PostgreSQL</span><span data-spotlight>MySQL</span><span data-spotlight>SQL Server</span><span data-spotlight>MariaDB</span><span data-spotlight>MongoDB</span><span data-spotlight>Supabase</span><span data-spotlight>Firebase</span></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg">PostgreSQL</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg">MySQL</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg">SQL Server</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg">MariaDB</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg">MongoDB</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg">Supabase</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg">Firebase</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">SQL</span>SQL Queries</span>
+              </div>
             </article>
             <article class="skill-group" data-spotlight>
-              <div class="skill-group-title"><h3 data-i18n="skillDevops">DevOps & Tools</h3></div>
-              <div class="skill-list"><span data-spotlight>Git</span><span data-spotlight>Docker</span><span data-spotlight>Jenkins</span><span data-spotlight>CI/CD</span><span data-spotlight>Postman</span><span data-spotlight>AWS</span><span data-spotlight>S3</span></div>
+              <div class="skill-group-title"><h3 data-i18n="skillDevops">Cloud & DevOps</h3></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg">AWS</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">S3</span>S3</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg">Git</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg">Docker</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg">Jenkins</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">CI</span>CI/CD</span>
+              </div>
             </article>
             <article class="skill-group" data-spotlight>
-              <div class="skill-group-title"><h3 data-i18n="skillAi">AI Tools</h3></div>
-              <div class="skill-list"><span data-spotlight>ChatGPT</span><span data-spotlight>Codex</span><span data-spotlight>AI-assisted workflow</span></div>
+              <div class="skill-group-title"><h3 data-i18n="skillAi">AI & Tools</h3></div>
+              <div class="skill-list">
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg">Postman</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">GPT</span>ChatGPT</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">CX</span>Codex</span>
+                <span class="tech-item" data-spotlight><span class="tech-fallback">AI</span>AI-assisted workflow</span>
+              </div>
             </article>
           </div>
         </section>
@@ -635,12 +707,13 @@
             experienceJuniorText: "Desenvolvimento e manutenção de módulos web, criação de consultas SQL, ajustes em telas, apoio ao suporte técnico e análise de incidentes em produção. Ganhei base forte em sustentação de sistemas, leitura de código legado, depuração de fluxos críticos e comunicação com áreas de negócio para transformar problemas operacionais em correções objetivas.",
             experienceInstructorText: "Responsável por aulas de informática, redes, hardware e fundamentos de tecnologia para turmas com diferentes níveis de conhecimento. A experiência fortaleceu minha didática, organização de conteúdo, comunicação técnica e capacidade de explicar problemas complexos de forma simples.",
             experienceSupportText: "Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.",
+            experienceInternText: "Atuação generalista em TI, apoiando infraestrutura, redes, servidores, manutenção preventiva e corretiva, suporte a usuários, montagem e manutenção de computadores e padronização de sistemas. A experiência deu uma base prática forte em operação, diagnóstico, organização de ambientes e resolução de problemas técnicos em diferentes frentes.",
             skillLanguages: "Linguagens",
             skillFrontend: "Front-end",
             skillBackend: "Back-end",
             skillDatabase: "Databases & BaaS",
-            skillDevops: "DevOps & Tools",
-            skillAi: "AI Tools",
+            skillDevops: "Cloud & DevOps",
+            skillAi: "AI & Tools",
             projectOneKind: "Case profissional",
             projectOneText: "E-commerce real, manutenção, queries e evolução de produto.",
             projectTwoKind: "Case em montagem",
@@ -679,12 +752,13 @@
             experienceJuniorText: "Development and maintenance of web modules, SQL query creation, screen adjustments, technical support and production incident analysis. This role gave me a strong foundation in system sustainment, legacy-code reading, critical-flow debugging and communication with business teams to turn operational problems into objective fixes.",
             experienceInstructorText: "Responsible for teaching computer basics, networks, hardware and technology fundamentals to groups with different levels of experience. This strengthened my teaching skills, content organization, technical communication and ability to explain complex problems in a simple way.",
             experienceSupportText: "Support and incident diagnosis in a commercial automation environment, helping users solve operational problems, configure systems and identify recurring failures. This was an important foundation for understanding business urgency, production support and the real impact of software in companies' daily routines.",
+            experienceInternText: "Generalist IT work supporting infrastructure, networks, servers, preventive and corrective maintenance, user support, computer assembly and maintenance, and system standardization. This experience gave me a strong practical foundation in operations, diagnosis, environment organization and technical problem solving across different areas.",
             skillLanguages: "Languages",
             skillFrontend: "Front-end",
             skillBackend: "Back-end",
             skillDatabase: "Databases & BaaS",
-            skillDevops: "DevOps & Tools",
-            skillAi: "AI Tools",
+            skillDevops: "Cloud & DevOps",
+            skillAi: "AI & Tools",
             projectOneKind: "Professional case",
             projectOneText: "Real e-commerce platform, maintenance, queries and product evolution.",
             projectTwoKind: "Case in progress",

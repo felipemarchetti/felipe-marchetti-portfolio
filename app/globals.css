@@ -409,26 +409,53 @@ h1 {
 }
 
 .skill-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .skill-list span {
+  align-items: center;
   background: var(--accent-soft);
   border: 1px solid rgba(255, 219, 112, 0.22);
-  border-radius: 999px;
+  border-radius: 14px;
   color: var(--accent);
+  display: flex;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.82rem;
   font-weight: 700;
+  gap: 9px;
+  min-height: 46px;
   overflow: hidden;
-  padding: 9px 12px;
+  padding: 10px;
   transition:
     background 180ms ease,
     border-color 180ms ease,
     color 180ms ease,
     transform 180ms ease;
+}
+
+.tech-item img,
+.tech-fallback {
+  flex: 0 0 auto;
+  height: 24px;
+  width: 24px;
+}
+
+.tech-item img {
+  display: block;
+  object-fit: contain;
+}
+
+.tech-fallback {
+  align-items: center;
+  background: rgba(255, 219, 112, 0.18);
+  border: 1px solid rgba(255, 219, 112, 0.28);
+  border-radius: 8px;
+  color: var(--accent);
+  display: inline-flex;
+  font-size: 0.68rem;
+  justify-content: center;
 }
 
 .project-grid {
@@ -538,7 +565,7 @@ h1 {
     background: rgba(255, 219, 112, 0.2);
     border-color: var(--accent-line);
     color: #fff0b0;
-    transform: translateY(-3px) scale(1.06);
+    transform: translateY(-3px) scale(1.035);
   }
 
   .contact-section:hover {
@@ -582,6 +609,7 @@ h1 {
 
   .highlight-grid,
   .skill-groups,
+  .skill-list,
   .project-grid,
   .contact-section {
     grid-template-columns: 1fr;

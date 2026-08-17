@@ -55,15 +55,91 @@ const experiences = [
     "experienceSupportText",
     "Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.",
   ],
+  [
+    "Estagiário de TI",
+    "Secretaria de Educação de Francisco Morato",
+    "Mar/2018 - Out/2019",
+    "experienceInternText",
+    "Atuação generalista em TI, apoiando infraestrutura, redes, servidores, manutenção preventiva e corretiva, suporte a usuários, montagem e manutenção de computadores e padronização de sistemas. A experiência deu uma base prática forte em operação, diagnóstico, organização de ambientes e resolução de problemas técnicos em diferentes frentes.",
+  ],
 ];
 
 const skillGroups = [
-  { icon: Code2, title: "Linguagens", titleKey: "skillLanguages", skills: ["PHP", "JavaScript", "TypeScript", "Python", "SQL", "C#", "Java", "Go"] },
-  { icon: Cpu, title: "Front-end", titleKey: "skillFrontend", skills: ["HTML5", "CSS3", "React", "Vue.js", "JavaScript", "TypeScript"] },
-  { icon: ServerCog, title: "Back-end", titleKey: "skillBackend", skills: ["Laravel", "Node.js", "APIs REST", "PHP", "Docker"] },
-  { icon: Database, title: "Databases & BaaS", titleKey: "skillDatabase", skills: ["PostgreSQL", "MySQL", "SQL Server", "MariaDB", "MongoDB", "Supabase", "Firebase"] },
-  { icon: Cloud, title: "DevOps & Tools", titleKey: "skillDevops", skills: ["Git", "Docker", "Jenkins", "CI/CD", "Postman", "AWS", "S3"] },
-  { icon: Wrench, title: "AI Tools", titleKey: "skillAi", skills: ["ChatGPT", "Codex", "AI-assisted workflow"] },
+  {
+    icon: Code2,
+    title: "Linguagens",
+    titleKey: "skillLanguages",
+    skills: [
+      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" },
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+      { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" },
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+      { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" },
+    ],
+  },
+  {
+    icon: Cpu,
+    title: "Front-end",
+    titleKey: "skillFrontend",
+    skills: [
+      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+      { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+      { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" },
+    ],
+  },
+  {
+    icon: ServerCog,
+    title: "Back-end",
+    titleKey: "skillBackend",
+    skills: [
+      { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+      { name: "REST APIs", fallback: "API" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+    ],
+  },
+  {
+    icon: Database,
+    title: "Databases & BaaS",
+    titleKey: "skillDatabase",
+    skills: [
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+      { name: "SQL Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" },
+      { name: "MariaDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
+      { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
+      { name: "SQL Queries", fallback: "SQL" },
+    ],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    titleKey: "skillDevops",
+    skills: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "S3", fallback: "S3" },
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" },
+      { name: "CI/CD", fallback: "CI" },
+    ],
+  },
+  {
+    icon: Wrench,
+    title: "AI & Tools",
+    titleKey: "skillAi",
+    skills: [
+      { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
+      { name: "ChatGPT", fallback: "GPT" },
+      { name: "Codex", fallback: "CX" },
+      { name: "AI-assisted workflow", fallback: "AI" },
+    ],
+  },
 ];
 
 const projects = [
@@ -172,7 +248,16 @@ export default function Home() {
                   <h3 data-i18n={titleKey}>{title}</h3>
                 </div>
                 <div className="skill-list">
-                  {skills.map((skill) => <span data-spotlight key={`${title}-${skill}`}>{skill}</span>)}
+                  {skills.map((skill) => (
+                    <span className="tech-item" data-spotlight key={`${title}-${skill.name}`}>
+                      {skill.icon ? (
+                        <img src={skill.icon} alt="" loading="lazy" />
+                      ) : (
+                        <span className="tech-fallback" aria-hidden="true">{skill.fallback}</span>
+                      )}
+                      {skill.name}
+                    </span>
+                  ))}
                 </div>
               </article>
             ))}
@@ -239,12 +324,13 @@ export default function Home() {
                   experienceJuniorText: "Desenvolvimento e manutenção de módulos web, criação de consultas SQL, ajustes em telas, apoio ao suporte técnico e análise de incidentes em produção. Ganhei base forte em sustentação de sistemas, leitura de código legado, depuração de fluxos críticos e comunicação com áreas de negócio para transformar problemas operacionais em correções objetivas.",
                   experienceInstructorText: "Responsável por aulas de informática, redes, hardware e fundamentos de tecnologia para turmas com diferentes níveis de conhecimento. A experiência fortaleceu minha didática, organização de conteúdo, comunicação técnica e capacidade de explicar problemas complexos de forma simples.",
                   experienceSupportText: "Atendimento e diagnóstico de incidentes em ambiente de automação comercial, auxiliando usuários na resolução de problemas operacionais, configuração de sistemas e identificação de falhas recorrentes. Foi uma base importante para entender urgência de negócio, suporte em produção e impacto real de software no dia a dia das empresas.",
+                  experienceInternText: "Atuação generalista em TI, apoiando infraestrutura, redes, servidores, manutenção preventiva e corretiva, suporte a usuários, montagem e manutenção de computadores e padronização de sistemas. A experiência deu uma base prática forte em operação, diagnóstico, organização de ambientes e resolução de problemas técnicos em diferentes frentes.",
                   skillLanguages: "Linguagens",
                   skillFrontend: "Front-end",
                   skillBackend: "Back-end",
                   skillDatabase: "Databases & BaaS",
-                  skillDevops: "DevOps & Tools",
-                  skillAi: "AI Tools",
+                  skillDevops: "Cloud & DevOps",
+                  skillAi: "AI & Tools",
                   projectOneKind: "Case profissional",
                   projectOneText: "E-commerce real, manutenção, queries e evolução de produto.",
                   projectTwoKind: "Case em montagem",
@@ -283,12 +369,13 @@ export default function Home() {
                   experienceJuniorText: "Development and maintenance of web modules, SQL query creation, screen adjustments, technical support and production incident analysis. This role gave me a strong foundation in system sustainment, legacy-code reading, critical-flow debugging and communication with business teams to turn operational problems into objective fixes.",
                   experienceInstructorText: "Responsible for teaching computer basics, networks, hardware and technology fundamentals to groups with different levels of experience. This strengthened my teaching skills, content organization, technical communication and ability to explain complex problems in a simple way.",
                   experienceSupportText: "Support and incident diagnosis in a commercial automation environment, helping users solve operational problems, configure systems and identify recurring failures. This was an important foundation for understanding business urgency, production support and the real impact of software in companies' daily routines.",
+                  experienceInternText: "Generalist IT work supporting infrastructure, networks, servers, preventive and corrective maintenance, user support, computer assembly and maintenance, and system standardization. This experience gave me a strong practical foundation in operations, diagnosis, environment organization and technical problem solving across different areas.",
                   skillLanguages: "Languages",
                   skillFrontend: "Front-end",
                   skillBackend: "Back-end",
                   skillDatabase: "Databases & BaaS",
-                  skillDevops: "DevOps & Tools",
-                  skillAi: "AI Tools",
+                  skillDevops: "Cloud & DevOps",
+                  skillAi: "AI & Tools",
                   projectOneKind: "Professional case",
                   projectOneText: "Real e-commerce platform, maintenance, queries and product evolution.",
                   projectTwoKind: "Case in progress",
