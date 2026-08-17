@@ -1,11 +1,14 @@
 import {
   BriefcaseBusiness,
+  ChevronLeft,
+  ChevronRight,
   Cloud,
   Code2,
   Cpu,
   Database,
   Download,
   Link2,
+  Lock,
   Mail,
   MapPin,
   Phone,
@@ -144,9 +147,44 @@ const skillGroups = [
 ];
 
 const projects = [
-  ["Sublimity Commerce", "projectOneKind", "Case profissional", "projectOneText", "E-commerce real, manutenção, queries e evolução de produto."],
-  ["SQL Investigation", "projectTwoKind", "Case em montagem", "projectTwoText", "Queries, modelagem e diagnóstico de inconsistências."],
-  ["Full-stack Lab", "projectThreeKind", "Projeto autoral", "projectThreeText", "Espaço para demos públicas com API, front-end e deploy."],
+  {
+    name: "Sublimity Ecommerce",
+    kindKey: "projectSublimityKind",
+    kind: "Projeto profissional",
+    textKey: "projectSublimityText",
+    text: "E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.",
+    tags: ["PHP", "Laravel", "JavaScript", "SQL"],
+    locked: true,
+  },
+  {
+    name: "MamaEliza",
+    kindKey: "projectMamaElizaKind",
+    kind: "Projeto autoral",
+    textKey: "projectMamaElizaText",
+    text: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
+    tags: ["PHP", "Laravel", "JavaScript", "CSS"],
+    images: ["/assets/project-mamaeliza-store.png", "/assets/project-mamaeliza-admin.png"],
+    locked: true,
+  },
+  {
+    name: "PDV Online",
+    kindKey: "projectPdvKind",
+    kind: "Projeto autoral",
+    textKey: "projectPdvText",
+    text: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
+    tags: ["PHP", "JavaScript", "CSS"],
+    images: ["/assets/project-pdv-sale.png", "/assets/project-pdv-cart.png"],
+    locked: true,
+  },
+  {
+    name: "EasyFarma",
+    kindKey: "projectEasyFarmaKind",
+    kind: "Projeto offline",
+    textKey: "projectEasyFarmaText",
+    text: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores.",
+    tags: ["Java", "Rede local", "Banco offline"],
+    locked: true,
+  },
 ];
 
 export default function Home() {
@@ -309,14 +347,43 @@ export default function Home() {
             <ShoppingCart size={24} />
             <h2 data-i18n="projectsTitle">Projetos</h2>
           </div>
-          <div className="project-grid">
-            {projects.map(([name, kindKey, kind, textKey, text]) => (
-              <article className="project-card" data-spotlight key={name}>
-                <small data-i18n={kindKey}>{kind}</small>
-                <h3>{name}</h3>
-                <p data-i18n={textKey}>{text}</p>
-              </article>
-            ))}
+          <div className="project-carousel" data-project-carousel>
+            <button className="carousel-control carousel-control-prev" type="button" aria-label="Projeto anterior" data-carousel-prev>
+              <ChevronLeft size={19} />
+            </button>
+            <div className="project-track">
+              {projects.map(({ name, kindKey, kind, textKey, text, tags, images, locked }) => (
+                <article className="project-card" data-spotlight key={name}>
+                  <div className="project-media">
+                    {images ? (
+                      images.map((image) => <img src={image} alt="" loading="lazy" key={image} />)
+                    ) : (
+                      <div className="project-placeholder">
+                        <ServerCog size={42} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="project-card-body">
+                    <div className="project-meta">
+                      <small data-i18n={kindKey}>{kind}</small>
+                      {locked ? (
+                        <span className="private-badge">
+                          <Lock size={13} /> <span data-i18n="privateLabel">Privado</span>
+                        </span>
+                      ) : null}
+                    </div>
+                    <h3>{name}</h3>
+                    <p data-i18n={textKey}>{text}</p>
+                    <div className="project-tags">
+                      {tags.map((tag) => <span key={`${name}-${tag}`}>{tag}</span>)}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <button className="carousel-control carousel-control-next" type="button" aria-label="Próximo projeto" data-carousel-next>
+              <ChevronRight size={19} />
+            </button>
           </div>
         </section>
 
@@ -352,7 +419,7 @@ export default function Home() {
                   contactTitle: "Vamos conversar?",
                   contactText: "Disponível para oportunidades full-stack no Brasil e exterior.",
                   emailButton: "Enviar email",
-                  resumeButton: "Currículo",
+                  resumeButton: "Currículo - PTBR",
                   resumeHref: "/cv/felipe-marchetti-curriculo-fullstack-pt.pdf",
                   htmlLang: "pt-BR",
                   contactEmail: "Email",
@@ -394,12 +461,15 @@ export default function Home() {
                   skillDatabase: "Databases & BaaS",
                   skillDevops: "Cloud & DevOps",
                   skillAi: "AI & Tools",
-                  projectOneKind: "Case profissional",
-                  projectOneText: "E-commerce real, manutenção, queries e evolução de produto.",
-                  projectTwoKind: "Case em montagem",
-                  projectTwoText: "Queries, modelagem e diagnóstico de inconsistências.",
-                  projectThreeKind: "Projeto autoral",
-                  projectThreeText: "Espaço para demos públicas com API, front-end e deploy."
+                  privateLabel: "Privado",
+                  projectSublimityKind: "Projeto profissional",
+                  projectSublimityText: "E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.",
+                  projectMamaElizaKind: "Projeto autoral",
+                  projectMamaElizaText: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
+                  projectPdvKind: "Projeto autoral",
+                  projectPdvText: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
+                  projectEasyFarmaKind: "Projeto offline",
+                  projectEasyFarmaText: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores."
                 },
                 en: {
                   status: "Open to work",
@@ -415,7 +485,7 @@ export default function Home() {
                   contactTitle: "Let's talk?",
                   contactText: "Available for full-stack opportunities in Brazil and abroad.",
                   emailButton: "Send email",
-                  resumeButton: "Resume",
+                  resumeButton: "Resume - EN",
                   resumeHref: "/cv/felipe-marchetti-fullstack-resume-en.pdf",
                   htmlLang: "en",
                   contactEmail: "Email",
@@ -457,12 +527,15 @@ export default function Home() {
                   skillDatabase: "Databases & BaaS",
                   skillDevops: "Cloud & DevOps",
                   skillAi: "AI & Tools",
-                  projectOneKind: "Professional case",
-                  projectOneText: "Real e-commerce platform, maintenance, queries and product evolution.",
-                  projectTwoKind: "Case in progress",
-                  projectTwoText: "Queries, modeling and diagnosis of data inconsistencies.",
-                  projectThreeKind: "Personal project",
-                  projectThreeText: "Space for public demos with API, front-end and deployment."
+                  privateLabel: "Private",
+                  projectSublimityKind: "Professional project",
+                  projectSublimityText: "Production e-commerce platform with feature evolution, maintenance, user support, business-rule analysis and data investigation.",
+                  projectMamaElizaKind: "Personal project",
+                  projectMamaElizaText: "Online delivery menu with a customer ordering flow and a complete admin panel for orders, products, ingredients, cash closing and reports.",
+                  projectPdvKind: "Personal project",
+                  projectPdvText: "Simplified web POS for non-fiscal sales, with stock control, revenue view, flat or percentage discounts and progressive promotions.",
+                  projectEasyFarmaKind: "Offline project",
+                  projectEasyFarmaText: "Desktop system for pharmacies, with sales, product registration and stock control over a local network, running offline across multiple computers."
                 }
               };
 
@@ -494,17 +567,13 @@ export default function Home() {
               const setActiveNav = () => {
                 const nav = document.querySelector(".nav");
                 const navHeight = nav ? nav.getBoundingClientRect().height : 0;
-                const scrollPosition = window.scrollY + navHeight + 90;
-                const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+                const activationLine = navHeight + 120;
                 let activeId = sections[0]?.id;
 
-                if (isAtBottom) {
-                  activeId = sections[sections.length - 1]?.id;
-                } else {
-                  sections.forEach((section) => {
-                    if (section.offsetTop <= scrollPosition) activeId = section.id;
-                  });
-                }
+                sections.forEach((section) => {
+                  const triggerLine = section.id === "contact" ? window.innerHeight * 0.75 : activationLine;
+                  if (section.getBoundingClientRect().top <= triggerLine) activeId = section.id;
+                });
 
                 navLinks.forEach((link) => {
                   const isActive = link.getAttribute("href") === "#" + activeId;
@@ -527,6 +596,21 @@ export default function Home() {
               window.addEventListener("resize", queueActiveNav);
               navLinks.forEach((link) => link.addEventListener("click", () => setTimeout(setActiveNav, 300)));
               setActiveNav();
+
+              document.querySelectorAll("[data-project-carousel]").forEach((carousel) => {
+                const track = carousel.querySelector(".project-track");
+                const prev = carousel.querySelector("[data-carousel-prev]");
+                const next = carousel.querySelector("[data-carousel-next]");
+                const move = (direction) => {
+                  if (!track) return;
+                  track.scrollBy({
+                    left: direction * track.clientWidth * 0.82,
+                    behavior: "smooth"
+                  });
+                };
+                prev?.addEventListener("click", () => move(-1));
+                next?.addEventListener("click", () => move(1));
+              });
 
               const surfaces = document.querySelectorAll("[data-spotlight]");
               surfaces.forEach((surface) => {

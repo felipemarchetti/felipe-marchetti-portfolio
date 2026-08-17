@@ -86,11 +86,11 @@
       }
 
       .avatar img {
+        background: #151516;
         display: block;
         height: 100%;
-        object-fit: cover;
-        object-position: 58% 18%;
-        transform: scale(0.94);
+        object-fit: contain;
+        object-position: center;
         width: 100%;
       }
 
@@ -483,11 +483,139 @@
         justify-content: center;
       }
 
-      .project-grid {
+      .project-carousel {
+        position: relative;
+      }
+
+      .project-track {
         display: grid;
         gap: 16px;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-columns: minmax(300px, 68%);
+        grid-auto-flow: column;
+        overflow-x: auto;
+        padding: 2px 2px 14px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
       }
+
+      .project-track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .project-track::-webkit-scrollbar-thumb {
+        background: rgba(255, 219, 112, 0.32);
+        border-radius: 999px;
+      }
+
+      .project-track .project-card {
+        scroll-snap-align: start;
+      }
+
+      .project-card {
+        display: grid;
+        padding: 0;
+        grid-template-rows: 168px minmax(0, 1fr);
+      }
+
+      .project-media {
+        background: #151516;
+        border-bottom: 1px solid var(--line);
+        display: grid;
+        gap: 1px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-height: 168px;
+        overflow: hidden;
+      }
+
+      .project-media img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        width: 100%;
+      }
+
+      .project-media img:only-child,
+      .project-placeholder {
+        grid-column: 1 / -1;
+      }
+
+      .project-placeholder {
+        align-items: center;
+        color: var(--accent);
+        display: flex;
+        font-size: 2.4rem;
+        justify-content: center;
+      }
+
+      .project-card-body {
+        padding: 20px;
+      }
+
+      .project-meta {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .project-card .project-meta small {
+        margin: 0;
+      }
+
+      .private-badge {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--muted);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 800;
+        gap: 5px;
+        padding: 5px 8px;
+        text-transform: uppercase;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .project-tags span {
+        background: var(--accent-soft);
+        border: 1px solid rgba(255, 219, 112, 0.22);
+        border-radius: 999px;
+        color: var(--accent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.74rem;
+        font-weight: 800;
+        padding: 6px 8px;
+      }
+
+      .carousel-control {
+        align-items: center;
+        background: var(--accent);
+        border: 0;
+        border-radius: 999px;
+        color: #191919;
+        cursor: pointer;
+        display: flex;
+        height: 36px;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        z-index: 4;
+        transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .carousel-control-prev { left: -12px; }
+      .carousel-control-next { right: -12px; }
 
       .contact-section {
         align-items: center;
@@ -574,6 +702,12 @@
 
         .project-card:hover { transform: translateY(-7px) scale(1.03); }
 
+        .carousel-control:hover {
+          background: #ffe68f;
+          box-shadow: 0 10px 24px rgba(255, 219, 112, 0.18);
+          transform: translateY(-50%) scale(1.08);
+        }
+
         .highlight-card:hover h3,
         .about-panel:hover h3,
         .timeline-item:hover h3,
@@ -609,9 +743,10 @@
         }
         .sidebar { bottom: auto; left: auto; position: static; width: auto; }
         .main-card { grid-column: auto; }
-        .avatar { height: 150px; }
+        .avatar { height: 220px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
-        .highlight-grid, .about-facts, .skill-groups, .skill-list, .project-grid, .contact-section { grid-template-columns: 1fr; }
+        .highlight-grid, .about-facts, .skill-groups, .skill-list, .contact-section { grid-template-columns: 1fr; }
+        .project-track { grid-auto-columns: minmax(260px, 86%); }
         .primary-action { width: 100%; }
         .contact-actions { justify-content: stretch; }
       }
@@ -619,6 +754,10 @@
       @media (max-width: 560px) {
         .section, .sidebar { padding: 22px; }
         .intro h2 { font-size: 2rem; }
+        .download-row { grid-template-columns: 1fr; }
+        .project-track { grid-auto-columns: 100%; }
+        .project-card { grid-template-rows: 150px minmax(0, 1fr); }
+        .carousel-control { display: none; }
       }
     </style>
   </head>
@@ -810,22 +949,59 @@
 
         <section class="section" id="projects">
           <div class="section-title"><h2 data-i18n="projectsTitle">Projetos</h2></div>
-          <div class="project-grid">
+          <div class="project-carousel" data-project-carousel>
+            <button class="carousel-control carousel-control-prev" type="button" aria-label="Projeto anterior" data-carousel-prev>&lt;</button>
+            <div class="project-track">
             <article class="project-card" data-spotlight>
-              <small data-i18n="projectOneKind">Case profissional</small>
-              <h3>Sublimity Commerce</h3>
-              <p data-i18n="projectOneText">E-commerce real, manutenção, queries e evolução de produto.</p>
+              <div class="project-media"><div class="project-placeholder">PHP</div></div>
+              <div class="project-card-body">
+                <div class="project-meta">
+                  <small data-i18n="projectSublimityKind">Projeto profissional</small>
+                  <span class="private-badge"><span aria-hidden="true">🔒</span><span data-i18n="privateLabel">Privado</span></span>
+                </div>
+                <h3>Sublimity Ecommerce</h3>
+                <p data-i18n="projectSublimityText">E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.</p>
+                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>SQL</span></div>
+              </div>
             </article>
             <article class="project-card" data-spotlight>
-              <small data-i18n="projectTwoKind">Case em montagem</small>
-              <h3>SQL Investigation</h3>
-              <p data-i18n="projectTwoText">Queries, modelagem e diagnóstico de inconsistências.</p>
+              <div class="project-media"><img alt="" loading="lazy" src="./assets/project-mamaeliza-store.png"><img alt="" loading="lazy" src="./assets/project-mamaeliza-admin.png"></div>
+              <div class="project-card-body">
+                <div class="project-meta">
+                  <small data-i18n="projectMamaElizaKind">Projeto autoral</small>
+                  <span class="private-badge"><span aria-hidden="true">🔒</span><span data-i18n="privateLabel">Privado</span></span>
+                </div>
+                <h3>MamaEliza</h3>
+                <p data-i18n="projectMamaElizaText">Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.</p>
+                <div class="project-tags"><span>PHP</span><span>Laravel</span><span>JavaScript</span><span>CSS</span></div>
+              </div>
             </article>
             <article class="project-card" data-spotlight>
-              <small data-i18n="projectThreeKind">Projeto autoral</small>
-              <h3>Full-stack Lab</h3>
-              <p data-i18n="projectThreeText">Espaço para demos públicas com API, front-end e deploy.</p>
+              <div class="project-media"><img alt="" loading="lazy" src="./assets/project-pdv-sale.png"><img alt="" loading="lazy" src="./assets/project-pdv-cart.png"></div>
+              <div class="project-card-body">
+                <div class="project-meta">
+                  <small data-i18n="projectPdvKind">Projeto autoral</small>
+                  <span class="private-badge"><span aria-hidden="true">🔒</span><span data-i18n="privateLabel">Privado</span></span>
+                </div>
+                <h3>PDV Online</h3>
+                <p data-i18n="projectPdvText">PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.</p>
+                <div class="project-tags"><span>PHP</span><span>JavaScript</span><span>CSS</span></div>
+              </div>
             </article>
+            <article class="project-card" data-spotlight>
+              <div class="project-media"><div class="project-placeholder">Java</div></div>
+              <div class="project-card-body">
+                <div class="project-meta">
+                  <small data-i18n="projectEasyFarmaKind">Projeto offline</small>
+                  <span class="private-badge"><span aria-hidden="true">🔒</span><span data-i18n="privateLabel">Privado</span></span>
+                </div>
+                <h3>EasyFarma</h3>
+                <p data-i18n="projectEasyFarmaText">Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores.</p>
+                <div class="project-tags"><span>Java</span><span>Rede local</span><span>Banco offline</span></div>
+              </div>
+            </article>
+            </div>
+            <button class="carousel-control carousel-control-next" type="button" aria-label="Próximo projeto" data-carousel-next>&gt;</button>
           </div>
         </section>
 
@@ -858,7 +1034,7 @@
             contactTitle: "Vamos conversar?",
             contactText: "Disponível para oportunidades full-stack no Brasil e exterior.",
             emailButton: "Enviar email",
-            resumeButton: "Currículo",
+            resumeButton: "Currículo - PTBR",
             resumeHref: "./cv/felipe-marchetti-curriculo-fullstack-pt.pdf",
             htmlLang: "pt-BR",
             contactEmail: "Email",
@@ -900,12 +1076,15 @@
             skillDatabase: "Databases & BaaS",
             skillDevops: "Cloud & DevOps",
             skillAi: "AI & Tools",
-            projectOneKind: "Case profissional",
-            projectOneText: "E-commerce real, manutenção, queries e evolução de produto.",
-            projectTwoKind: "Case em montagem",
-            projectTwoText: "Queries, modelagem e diagnóstico de inconsistências.",
-            projectThreeKind: "Projeto autoral",
-            projectThreeText: "Espaço para demos públicas com API, front-end e deploy."
+            privateLabel: "Privado",
+            projectSublimityKind: "Projeto profissional",
+            projectSublimityText: "E-commerce real em produção, com evolução de funcionalidades, manutenção, suporte a usuários, análise de regras de negócio e investigação de dados.",
+            projectMamaElizaKind: "Projeto autoral",
+            projectMamaElizaText: "Cardápio online para pedidos no estilo delivery, com visão do cliente e painel administrativo completo para pedidos, produtos, ingredientes, caixa e relatórios.",
+            projectPdvKind: "Projeto autoral",
+            projectPdvText: "PDV web simplificado para vendas sem emissão fiscal, com estoque, faturamento, descontos por valor ou porcentagem e promoções progressivas.",
+            projectEasyFarmaKind: "Projeto offline",
+            projectEasyFarmaText: "Sistema desktop para farmácias, com venda, cadastro de produtos e controle de estoque em rede local, funcionando offline em múltiplos computadores."
           },
           en: {
             status: "Open to work",
@@ -921,7 +1100,7 @@
             contactTitle: "Let's talk?",
             contactText: "Available for full-stack opportunities in Brazil and abroad.",
             emailButton: "Send email",
-            resumeButton: "Resume",
+            resumeButton: "Resume - EN",
             resumeHref: "./cv/felipe-marchetti-fullstack-resume-en.pdf",
             htmlLang: "en",
             contactEmail: "Email",
@@ -963,12 +1142,15 @@
             skillDatabase: "Databases & BaaS",
             skillDevops: "Cloud & DevOps",
             skillAi: "AI & Tools",
-            projectOneKind: "Professional case",
-            projectOneText: "Real e-commerce platform, maintenance, queries and product evolution.",
-            projectTwoKind: "Case in progress",
-            projectTwoText: "Queries, modeling and diagnosis of data inconsistencies.",
-            projectThreeKind: "Personal project",
-            projectThreeText: "Space for public demos with API, front-end and deployment."
+            privateLabel: "Private",
+            projectSublimityKind: "Professional project",
+            projectSublimityText: "Production e-commerce platform with feature evolution, maintenance, user support, business-rule analysis and data investigation.",
+            projectMamaElizaKind: "Personal project",
+            projectMamaElizaText: "Online delivery menu with a customer ordering flow and a complete admin panel for orders, products, ingredients, cash closing and reports.",
+            projectPdvKind: "Personal project",
+            projectPdvText: "Simplified web POS for non-fiscal sales, with stock control, revenue view, flat or percentage discounts and progressive promotions.",
+            projectEasyFarmaKind: "Offline project",
+            projectEasyFarmaText: "Desktop system for pharmacies, with sales, product registration and stock control over a local network, running offline across multiple computers."
           }
         };
 
@@ -1000,17 +1182,13 @@
         const setActiveNav = () => {
           const nav = document.querySelector(".nav");
           const navHeight = nav ? nav.getBoundingClientRect().height : 0;
-          const scrollPosition = window.scrollY + navHeight + 90;
-          const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+          const activationLine = navHeight + 120;
           let activeId = sections[0]?.id;
 
-          if (isAtBottom) {
-            activeId = sections[sections.length - 1]?.id;
-          } else {
-            sections.forEach((section) => {
-              if (section.offsetTop <= scrollPosition) activeId = section.id;
-            });
-          }
+          sections.forEach((section) => {
+            const triggerLine = section.id === "contact" ? window.innerHeight * 0.75 : activationLine;
+            if (section.getBoundingClientRect().top <= triggerLine) activeId = section.id;
+          });
 
           navLinks.forEach((link) => {
             const isActive = link.getAttribute("href") === "#" + activeId;
@@ -1033,6 +1211,21 @@
         window.addEventListener("resize", queueActiveNav);
         navLinks.forEach((link) => link.addEventListener("click", () => setTimeout(setActiveNav, 300)));
         setActiveNav();
+
+        document.querySelectorAll("[data-project-carousel]").forEach((carousel) => {
+          const track = carousel.querySelector(".project-track");
+          const prev = carousel.querySelector("[data-carousel-prev]");
+          const next = carousel.querySelector("[data-carousel-next]");
+          const move = (direction) => {
+            if (!track) return;
+            track.scrollBy({
+              left: direction * track.clientWidth * 0.82,
+              behavior: "smooth"
+            });
+          };
+          prev?.addEventListener("click", () => move(-1));
+          next?.addEventListener("click", () => move(1));
+        });
 
         const surfaces = document.querySelectorAll("[data-spotlight]");
         surfaces.forEach((surface) => {
