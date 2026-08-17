@@ -77,7 +77,7 @@ a {
 
 .avatar {
   align-items: center;
-  background: linear-gradient(135deg, #303033, #1b1b1d);
+  background: #1b1b1d;
   border-radius: 20px;
   color: var(--accent);
   display: flex;
@@ -87,11 +87,20 @@ a {
   height: 184px;
   justify-content: center;
   margin-bottom: 24px;
+  overflow: hidden;
   width: 100%;
   transition:
     background 180ms ease,
     color 180ms ease,
     transform 180ms ease;
+}
+
+.avatar img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 26%;
+  width: 100%;
 }
 
 .status,
@@ -367,6 +376,49 @@ h1 {
   margin-top: 28px;
 }
 
+.about-panel {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-top: 16px;
+  overflow: hidden;
+  padding: 22px;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.about-panel h3 {
+  font-size: 1.16rem;
+  margin-bottom: 10px;
+  transition: color 180ms ease;
+}
+
+.about-panel p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.about-facts {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.about-facts span {
+  background: var(--accent-soft);
+  border: 1px solid rgba(255, 219, 112, 0.22);
+  border-radius: 12px;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 10px 12px;
+}
+
 .highlight-card,
 .timeline-item,
 .project-card {
@@ -545,6 +597,19 @@ h1 {
   margin: 0;
 }
 
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.whatsapp-action img {
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+
 @media (hover: hover) and (pointer: fine) {
   [data-spotlight]::before {
     background:
@@ -579,7 +644,7 @@ h1 {
   }
 
   .sidebar:hover .avatar {
-    background: linear-gradient(135deg, #38322a, #202022);
+    background: #202022;
     color: #fff0b0;
     transform: scale(1.015);
   }
@@ -606,6 +671,7 @@ h1 {
   }
 
   .highlight-card:hover,
+  .about-panel:hover,
   .skill-group:hover,
   .timeline-item:hover,
   .project-card:hover {
@@ -621,6 +687,7 @@ h1 {
   }
 
   .highlight-card:hover h3,
+  .about-panel:hover h3,
   .skill-group:hover h3,
   .timeline-item:hover h3,
   .project-card:hover h3 {
@@ -674,6 +741,7 @@ h1 {
   }
 
   .highlight-grid,
+  .about-facts,
   .skill-groups,
   .skill-list,
   .project-grid,
@@ -683,6 +751,10 @@ h1 {
 
   .primary-action {
     width: 100%;
+  }
+
+  .contact-actions {
+    justify-content: stretch;
   }
 }
 

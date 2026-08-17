@@ -1,20 +1,16 @@
 import {
   BriefcaseBusiness,
-  Braces,
   Cloud,
   Code2,
   Cpu,
   Database,
   Download,
-  GitBranch,
-  Languages,
   Link2,
   Mail,
   MapPin,
   Phone,
   ServerCog,
   ShoppingCart,
-  Sparkles,
   Wrench,
 } from "lucide-react";
 
@@ -107,7 +103,7 @@ const skillGroups = [
     skills: [
       { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-      { name: "REST APIs", glyph: Braces },
+      { name: "REST APIs", icon: "/assets/api-icon.svg" },
     ],
   },
   {
@@ -133,7 +129,7 @@ const skillGroups = [
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
       { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
       { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" },
-      { name: "CI/CD", glyph: GitBranch },
+      { name: "CI/CD", icon: "/assets/cicd-icon.svg" },
     ],
   },
   {
@@ -142,7 +138,7 @@ const skillGroups = [
     titleKey: "skillAi",
     skills: [
       { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
-      { name: "AI-assisted workflow", glyph: Sparkles },
+      { name: "AI-assisted workflow", icon: "/assets/ai-workflow-icon.svg" },
     ],
   },
 ];
@@ -157,10 +153,12 @@ export default function Home() {
   return (
     <main className="page-shell">
       <aside className="sidebar" data-spotlight>
-        <div className="avatar" aria-hidden="true">FM</div>
+        <div className="avatar" aria-hidden="true">
+          <img src="/assets/felipe-marchetti-profile.png" alt="" />
+        </div>
         <p className="status" data-i18n="status">Open to work</p>
         <h1>Felipe Cunha Marchetti</h1>
-        <p className="role">Full-Stack PHP Developer</p>
+        <p className="role">Full-Stack Web Developer</p>
 
         <div className="language-toggle" aria-label="Language selector">
           <button className="active" type="button" data-lang-switch="pt">
@@ -189,21 +187,6 @@ export default function Home() {
               <div key={label}>{content}</div>
             );
           })}
-        </div>
-
-        <div className="language-list">
-          <div className="language-heading">
-            <Languages size={17} />
-            <small data-i18n="languagesTitle">Idiomas</small>
-          </div>
-          <div className="language-item">
-            <span data-i18n="portugueseLabel">Português</span>
-            <strong data-i18n="portugueseLevel">Nativo</strong>
-          </div>
-          <div className="language-item">
-            <span data-i18n="englishLabel">Inglês</span>
-            <strong data-i18n="englishLevel">Avançado</strong>
-          </div>
         </div>
 
         <div className="download-row single">
@@ -240,6 +223,20 @@ export default function Home() {
               </article>
             ))}
           </div>
+
+          <div className="about-panel" data-spotlight>
+            <h3 data-i18n="aboutMeTitle">Sobre mim</h3>
+            <p data-i18n="aboutMeText">
+              Sou formado em Ciência da Computação, tenho mais de 5 anos de experiência codando
+              e gosto de construir soluções web com visão prática de produto, suporte e operação.
+            </p>
+            <div className="about-facts">
+              <span data-i18n="degreeFact">Bacharel em Ciência da Computação</span>
+              <span data-i18n="codingFact">5+ anos codando</span>
+              <span data-i18n="portugueseFact">Português nativo</span>
+              <span data-i18n="englishFact">Inglês avançado</span>
+            </div>
+          </div>
         </section>
 
         <section className="section" id="resume">
@@ -273,16 +270,10 @@ export default function Home() {
                 </div>
                 <div className="skill-list">
                   {skills.map((skill) => {
-                    const Glyph = skill.glyph;
-
                     return (
                       <span className="tech-item" data-spotlight key={`${title}-${skill.name}`}>
                         {skill.icon ? (
                           <img src={skill.icon} alt="" loading="lazy" />
-                        ) : Glyph ? (
-                          <span className="tech-generic" aria-hidden="true">
-                            <Glyph size={16} />
-                          </span>
                         ) : (
                           <span className="tech-fallback" aria-hidden="true">{skill.fallback}</span>
                         )}
@@ -315,9 +306,14 @@ export default function Home() {
         <section className="section contact-section" data-spotlight id="contact">
           <h2 data-i18n="contactTitle">Vamos conversar?</h2>
           <p data-i18n="contactText">Disponível para oportunidades full-stack no Brasil e exterior.</p>
-          <a className="primary-action" href="mailto:felipecmarchetti@gmail.com">
-            <Mail size={18} /> <span data-i18n="emailButton">Enviar email</span>
-          </a>
+          <div className="contact-actions">
+            <a className="primary-action" href="mailto:felipecmarchetti@gmail.com">
+              <Mail size={18} /> <span data-i18n="emailButton">Enviar email</span>
+            </a>
+            <a className="primary-action whatsapp-action" href="https://wa.me/5511968660968">
+              <img src="/assets/whatsapp-icon.svg" alt="" /> WhatsApp
+            </a>
+          </div>
         </section>
       </section>
       <script
@@ -350,6 +346,12 @@ export default function Home() {
                   portugueseLevel: "Nativo",
                   englishLabel: "Inglês",
                   englishLevel: "Avançado",
+                  aboutMeTitle: "Sobre mim",
+                  aboutMeText: "Sou formado em Ciência da Computação, tenho mais de 5 anos de experiência codando e gosto de construir soluções web com visão prática de produto, suporte e operação.",
+                  degreeFact: "Bacharel em Ciência da Computação",
+                  codingFact: "5+ anos codando",
+                  portugueseFact: "Português nativo",
+                  englishFact: "Inglês avançado",
                   roleMidPhp: "Programador PHP Pleno",
                   roleJuniorPhp: "Programador PHP Junior",
                   roleInstructor: "Instrutor de Informática",
@@ -406,6 +408,12 @@ export default function Home() {
                   portugueseLevel: "Native",
                   englishLabel: "English",
                   englishLevel: "Advanced",
+                  aboutMeTitle: "About me",
+                  aboutMeText: "I hold a Bachelor's degree in Computer Science, have 5+ years of coding experience, and enjoy building web solutions with a practical understanding of product, support and operations.",
+                  degreeFact: "B.Sc. in Computer Science",
+                  codingFact: "5+ years coding",
+                  portugueseFact: "Native Portuguese",
+                  englishFact: "Advanced English",
                   roleMidPhp: "Mid-level PHP Developer",
                   roleJuniorPhp: "Junior PHP Developer",
                   roleInstructor: "IT Instructor",

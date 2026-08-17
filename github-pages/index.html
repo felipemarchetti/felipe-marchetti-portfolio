@@ -67,7 +67,7 @@
 
       .avatar {
         align-items: center;
-        background: linear-gradient(135deg, #303033, #1b1b1d);
+        background: #1b1b1d;
         border-radius: 20px;
         color: var(--accent);
         display: flex;
@@ -77,7 +77,16 @@
         height: 184px;
         justify-content: center;
         margin-bottom: 24px;
+        overflow: hidden;
         transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+      }
+
+      .avatar img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: 58% 26%;
+        width: 100%;
       }
 
       .status,
@@ -300,6 +309,45 @@
         margin-top: 28px;
       }
 
+      .about-panel {
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        margin-top: 16px;
+        overflow: hidden;
+        padding: 22px;
+        transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .about-panel h3 {
+        font-size: 1.16rem;
+        margin-bottom: 10px;
+        transition: color 180ms ease;
+      }
+
+      .about-panel p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .about-facts {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-facts span {
+        background: var(--accent-soft);
+        border: 1px solid rgba(255, 219, 112, 0.22);
+        border-radius: 12px;
+        color: var(--accent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 10px 12px;
+      }
+
       .highlight-card,
       .timeline-item,
       .project-card,
@@ -427,6 +475,19 @@
 
       .contact-section p { margin: 0; }
 
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .whatsapp-action img {
+        display: block;
+        height: 20px;
+        width: 20px;
+      }
+
       @media (hover: hover) and (pointer: fine) {
         [data-spotlight]::before {
           background:
@@ -455,7 +516,7 @@
         }
 
         .sidebar:hover .avatar {
-          background: linear-gradient(135deg, #38322a, #202022);
+          background: #202022;
           color: #fff0b0;
           transform: scale(1.015);
         }
@@ -476,6 +537,7 @@
         }
 
         .highlight-card:hover,
+        .about-panel:hover,
         .timeline-item:hover,
         .project-card:hover,
         .skill-group:hover {
@@ -489,6 +551,7 @@
         .project-card:hover { transform: translateY(-7px) scale(1.03); }
 
         .highlight-card:hover h3,
+        .about-panel:hover h3,
         .timeline-item:hover h3,
         .project-card:hover h3,
         .skill-group:hover h3 {
@@ -523,8 +586,9 @@
         .sidebar { position: static; }
         .avatar { height: 150px; }
         .nav { justify-content: flex-start; overflow-x: auto; }
-        .highlight-grid, .skill-groups, .skill-list, .project-grid, .contact-section { grid-template-columns: 1fr; }
+        .highlight-grid, .about-facts, .skill-groups, .skill-list, .project-grid, .contact-section { grid-template-columns: 1fr; }
         .primary-action { width: 100%; }
+        .contact-actions { justify-content: stretch; }
       }
 
       @media (max-width: 560px) {
@@ -536,10 +600,10 @@
   <body>
     <main class="page-shell">
       <aside class="sidebar" data-spotlight>
-        <div class="avatar" aria-hidden="true">FM</div>
+        <div class="avatar" aria-hidden="true"><img alt="" src="./assets/felipe-marchetti-profile.png"></div>
         <p class="status" data-i18n="status">Open to work</p>
         <h1>Felipe Cunha Marchetti</h1>
-        <p class="role">Full-Stack PHP Developer</p>
+        <p class="role">Full-Stack Web Developer</p>
 
         <div class="language-toggle" aria-label="Language selector">
           <button class="active" type="button" data-lang-switch="pt"><img alt="" src="https://flagcdn.com/w20/br.png"> PT</button>
@@ -563,20 +627,6 @@
             <small data-i18n="contactLinkedin">LinkedIn</small>
             <span>felipe-cunha-marchetti</span>
           </a>
-        </div>
-
-        <div class="language-list">
-          <div class="language-heading">
-            <small data-i18n="languagesTitle">Idiomas</small>
-          </div>
-          <div class="language-item">
-            <span data-i18n="portugueseLabel">Português</span>
-            <strong data-i18n="portugueseLevel">Nativo</strong>
-          </div>
-          <div class="language-item">
-            <span data-i18n="englishLabel">Inglês</span>
-            <strong data-i18n="englishLevel">Avançado</strong>
-          </div>
         </div>
 
         <div class="download-row">
@@ -619,6 +669,17 @@
               <h3 data-i18n="highlightMaintenanceTitle">Manutenção</h3>
               <p data-i18n="highlightMaintenanceText">Bugs, evolução, troubleshooting e melhoria contínua.</p>
             </article>
+          </div>
+
+          <div class="about-panel" data-spotlight>
+            <h3 data-i18n="aboutMeTitle">Sobre mim</h3>
+            <p data-i18n="aboutMeText">Sou formado em Ciência da Computação, tenho mais de 5 anos de experiência codando e gosto de construir soluções web com visão prática de produto, suporte e operação.</p>
+            <div class="about-facts">
+              <span data-i18n="degreeFact">Bacharel em Ciência da Computação</span>
+              <span data-i18n="codingFact">5+ anos codando</span>
+              <span data-i18n="portugueseFact">Português nativo</span>
+              <span data-i18n="englishFact">Inglês avançado</span>
+            </div>
           </div>
         </section>
 
@@ -686,7 +747,7 @@
               <div class="skill-list">
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg">Laravel</span>
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg">Node.js</span>
-                <span class="tech-item" data-spotlight><span class="tech-generic"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg></span>REST APIs</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="./assets/api-icon.svg">REST APIs</span>
               </div>
             </article>
             <article class="skill-group" data-spotlight>
@@ -708,14 +769,14 @@
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg">Git</span>
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg">Docker</span>
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg">Jenkins</span>
-                <span class="tech-item" data-spotlight><span class="tech-generic"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M9 6h1a8 8 0 0 1 8 8v1"></path><path d="M6 9v1a8 8 0 0 0 8 8h1"></path></svg></span>CI/CD</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="./assets/cicd-icon.svg">CI/CD</span>
               </div>
             </article>
             <article class="skill-group" data-spotlight>
               <div class="skill-group-title"><h3 data-i18n="skillAi">AI & Tools</h3></div>
               <div class="skill-list">
                 <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg">Postman</span>
-                <span class="tech-item" data-spotlight><span class="tech-generic"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg></span>AI-assisted workflow</span>
+                <span class="tech-item" data-spotlight><img alt="" loading="lazy" src="./assets/ai-workflow-icon.svg">AI-assisted workflow</span>
               </div>
             </article>
           </div>
@@ -747,7 +808,10 @@
             <h2 data-i18n="contactTitle">Vamos conversar?</h2>
             <p data-i18n="contactText">Disponível para oportunidades full-stack no Brasil e exterior.</p>
           </div>
-          <a class="primary-action" href="mailto:felipecmarchetti@gmail.com"><span data-i18n="emailButton">Enviar email</span></a>
+          <div class="contact-actions">
+            <a class="primary-action" href="mailto:felipecmarchetti@gmail.com"><span data-i18n="emailButton">Enviar email</span></a>
+            <a class="primary-action whatsapp-action" href="https://wa.me/5511968660968"><img alt="" src="./assets/whatsapp-icon.svg">WhatsApp</a>
+          </div>
         </section>
       </section>
     </main>
@@ -779,6 +843,12 @@
             portugueseLevel: "Nativo",
             englishLabel: "Inglês",
             englishLevel: "Avançado",
+            aboutMeTitle: "Sobre mim",
+            aboutMeText: "Sou formado em Ciência da Computação, tenho mais de 5 anos de experiência codando e gosto de construir soluções web com visão prática de produto, suporte e operação.",
+            degreeFact: "Bacharel em Ciência da Computação",
+            codingFact: "5+ anos codando",
+            portugueseFact: "Português nativo",
+            englishFact: "Inglês avançado",
             roleMidPhp: "Programador PHP Pleno",
             roleJuniorPhp: "Programador PHP Junior",
             roleInstructor: "Instrutor de Informática",
@@ -835,6 +905,12 @@
             portugueseLevel: "Native",
             englishLabel: "English",
             englishLevel: "Advanced",
+            aboutMeTitle: "About me",
+            aboutMeText: "I hold a Bachelor's degree in Computer Science, have 5+ years of coding experience, and enjoy building web solutions with a practical understanding of product, support and operations.",
+            degreeFact: "B.Sc. in Computer Science",
+            codingFact: "5+ years coding",
+            portugueseFact: "Native Portuguese",
+            englishFact: "Advanced English",
             roleMidPhp: "Mid-level PHP Developer",
             roleJuniorPhp: "Junior PHP Developer",
             roleInstructor: "IT Instructor",
